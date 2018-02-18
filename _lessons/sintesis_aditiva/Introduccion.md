@@ -3,15 +3,15 @@ layout: lessonTxt
 ---
 #<center>Síntesis Aditiva: Introducción</center>
 
-</br>
+<br>
 
 <div style="text-align: center;">
 <!-- <iframe width="600" height="400" src="https://www.youtube.com/embed/BUfHG6lQLWA"></iframe> -->
 <iframe src="https://docs.google.com/file/d/1YOvGvpK_b9IvQXwKpumZ8pSwGS40HsN3/preview" width="640" height="385" allowfullscreen="true"></iframe>
 </div>
-</br>
+<br>
 <hr>
-</br>
+<br>
 
 ## A. Ejercicios
 
