@@ -1,0 +1,68 @@
+  <div style="text-align: center;">
+    <div id="video-placeholder"></div>
+  </div>
+     
+  <div class="sideproject-content">
+    <div class="header">
+      <hr>
+      <h3>{{page.heading}}</h3>
+      <hr>
+    </div>
+    </br>
+    <ul style="list-style-type:disc">
+        {% assign sideprojects = site.lessons | where: "categories", page.sides_folder | sort: "order" %}
+        {% for sideproject in sideprojects %}
+          {% assign sideprojectbaseurl = {{sideproject.url}} | split: 'index.html' %}
+				
+				<li><a href="javascript:void(0);" onclick="player.cueVideoById('{{sideproject.yt-video}}'); $('#lesson').animate({scrollTop:0 },'fast'); player.playVideo(); ">Introducción a {{sideproject.title}}</a> | 
+				<a href="javascript:void(0);" onclick="loadMenuAndClick('{{site.baseurl}}{{sideprojectbaseurl}}');">Acceder a {{sideproject.title}}</a></li>
+ 		{% endfor %}
+    </ul>
+  
+  </div>
+  <br>
+  <script>
+    if (!youtube_api_init) {
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    } 
+    else {
+      player.destroy();
+      onYouTubeIframeAPIReady();
+      initialize();
+    }
+
+    var player ;
+    function onYouTubeIframeAPIReady() {
+        console.log("YouTube API Ready");
+        youtube_api_init = 1;
+        player = new YT.Player('video-placeholder', {
+            width: 600,
+            height: 400,
+            videoId: 'WPbz19I0PzE',
+            playerVars: {
+                color: 'white',
+            },
+            events: {
+                onReady: initialize
+            }
+        });
+    }
+    
+    function initialize(){
+      // 
+    }
+
+
+    $('#play').on('click', function () {
+        player.playVideo();
+    });
+
+
+    $('#pause').on('click', function () {
+        player.pauseVideo();
+    });
+
+  </script>

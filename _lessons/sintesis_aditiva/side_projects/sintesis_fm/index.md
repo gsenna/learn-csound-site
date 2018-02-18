@@ -1,0 +1,13 @@
+---
+layout: lesson
+title:  "Sintesis FM"
+date:   2014-03-27 17:00:00
+categories: sintesis_aditiva_sides
+sides_folder: sintesis_fm
+csd: fm.csd
+text: fm.html
+menu: menu.html
+yt-video: BUfHG6lQLWA
+order: 1
+---
+

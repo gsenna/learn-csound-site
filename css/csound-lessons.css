@@ -1,0 +1,145 @@
+#header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  font-size: 1.4em;
+  padding: 8px 4px;
+  line-height: 32px;
+  color: #222;
+  background: #E0EBF5;
+}
+
+#header a {
+  text-decoration: none;
+  color: #000000;
+}
+
+
+
+#editor-container {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  z-index: 40;
+}
+
+@media all and (min-width: 800px) {
+ #editor-container {
+  width: 49%;
+  }
+}
+
+
+#editor-controls {
+  float: left;
+}
+
+.CodeMirror {
+  position: absolute;
+  top: 10px;
+  /*bottom: 0;*/
+  height: 100%;
+  left: 0;
+  width: 100%;
+}
+
+
+#dragbar{
+   position: absolute;
+   background-color:yellow;
+   height:100%;
+   width: 4px;
+   top: 0;
+   bottom: 0;
+   left: 49%;
+   cursor: col-resize;
+   display: none;
+
+}
+@media all and (min-width: 800px) {
+  #dragbar {
+  display: block;
+  }
+
+}
+
+
+#lesson {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  overflow: auto;
+}
+
+@media all and (min-width: 800px) {
+ #lesson {
+  width: 50%;
+  }
+}
+
+#lessonText {
+  padding: 40px;
+  font-size: 18px;
+
+}
+
+/* MAIN PAGE */
+
+.lesson {
+  background: #E0EBF5;
+  padding: 0 0;
+  margin: 0 0;
+  position: relative;
+}
+
+.lessonTxt ol {
+	list-style: decimal;
+	padding: 0px 40px;
+
+}
+.lessonTxt ul {
+	list-style: disc;
+	padding: 0px 40px;
+
+}
+
+.lesson-title {
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 16px 0 0 0;
+  padding-right: 48px;
+}
+
+.lesson a {
+  text-decoration: none;
+}
+
+#content {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto 32px auto;
+  padding: 48px;
+}
+
+#content a {
+  color: #375eab;
+}
+
+#loadDiv {
+ z-index: 4000;
+ position: fixed;
+ width: 100%; 
+ height: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ background: black;
+ color: white;
+ font-family: Monospace;
+}
+

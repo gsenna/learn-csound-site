@@ -1,0 +1,42 @@
+        <button class="c-menu__go_back" onclick="loadMenu('{{site.baseurl}}');">&larr; Volver</button>
+        
+        {% assign lessons = site.lessons | where: "sides_folder", page.menu_folder| sort: "order" %}
+        {% for lesson in lessons %}
+          {% if lesson.sides_folder != nil %}
+            <li class="{{lesson.hasChildren}}">
+		      <input type="checkbox" name ="{{lesson.sides_folder}}" id="{{lesson.sides_folder}}" checked>
+			  <label for="{{lesson.sides_folder}}">{{lesson.title}}</label>
+
+			  <ul>
+                {% if lesson.text != nil %}
+                  {% assign lessonbaseurl = {{lesson.url}} | split: 'index.html' %}
+   		          <li><a href="javascript:void(0);" onclick="loadOnClick('{{site.baseurl}}{{lessonbaseurl}}','{{lesson.text}}','{{lesson.csd}}', true);">Introducción</a></li>
+   		        {% endif %}
+
+                {% assign sublessons = site.lessons | where: "categories", lesson.sides_folder %}
+                {% for sublesson in sublessons %}
+                  {% if sublesson.subfolder != nil %}
+                    <li class="{{sublesson.hasChildren}}">
+		              <input type="checkbox" name ="{{sublesson.subfolder}}" id="{{sublesson.subfolder}}">
+			          <label for="{{sublesson.subfolder}}">{{sublesson.title}}</label>
+                      
+                      <ul>
+                       {% if sublesson.text != nil %}
+                         {% assign sublessonbaseurl = {{sublesson.url}} | split: 'index.html' %}
+   		                 <li><a href="javascript:void(0);" onclick="loadOnClick('{{site.baseurl}}{{sublessonbaseurl}}','{{sublesson.text}}','{{sublesson.csd}}', true);">{{sublesson.title}}</a></li>
+   		               {% endif %}
+       
+                       {% assign lessonitems = site.lessons | where: "categories", sublesson.subfolder %}
+                       {% for lessonitem in lessonitems %}
+                         {% assign lessonitemsbaseurl = {{lessonitem.url}} | split: 'index.html' %}
+   		                 <li><a href="javascript:void(0);" onclick="loadOnClick('{{site.baseurl}}{{lessonitemsbaseurl}}','{{lessonitem.text}}','{{lessonitem.csd}}', true);">{{lessonitem.title}}</a></li>
+   		               {% endfor %}
+   		                 
+                      </ul>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+		      </ul>
+  		    </li>
+          {% endif %}
+        {% endfor %}

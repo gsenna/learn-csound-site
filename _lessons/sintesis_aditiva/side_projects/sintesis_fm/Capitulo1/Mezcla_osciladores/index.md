@@ -1,0 +1,10 @@
+---
+layout: lesson
+title:  "Paso 1"
+date:   2014-03-27 17:00:00
+categories: sintesis_fm_cap1
+csd: mc.csd
+text: mc.html
+order: 1
+---
+
