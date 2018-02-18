@@ -9,7 +9,7 @@
 
 			  <ul>
                 {% if lesson.text != nil %}
-                  {% assign lessonbaseurl = {{lesson.url}} | split: 'index.html' %}
+                  {% assign lessonbaseurl = {{lesson.url}} | split: 'index' %}
    		          <li><a href="javascript:void(0);" onclick="loadOnClick('{{site.baseurl}}{{lessonbaseurl}}','{{lesson.text}}','{{lesson.csd}}', true);">Introducción</a></li>
    		        {% endif %}
 
@@ -22,13 +22,13 @@
                       
                       <ul>
                        {% if sublesson.text != nil %}
-                         {% assign sublessonbaseurl = {{sublesson.url}} | split: 'index.html' %}
+                         {% assign sublessonbaseurl = {{sublesson.url}} | split: 'index' %}
    		                 <li><a href="javascript:void(0);" onclick="loadOnClick('{{site.baseurl}}{{sublessonbaseurl}}','{{sublesson.text}}','{{sublesson.csd}}', true);">{{sublesson.subtitle}}</a></li>
    		               {% endif %}
        
                        {% assign lessonitems = lessons | where: "categories", sublesson.subfolder %}
                        {% for lessonitem in lessonitems %}
-                         {% assign lessonitemsbaseurl = {{lessonitem.url}} | split: 'index.html' %}
+                         {% assign lessonitemsbaseurl = {{lessonitem.url}} | split: 'index' %}
    		                 <li><a href="javascript:void(0);" onclick="loadOnClick('{{site.baseurl}}{{lessonitemsbaseurl}}','{{lessonitem.text}}','{{lessonitem.csd}}', true);">{{lessonitem.title}}</a></li>
    		               {% endfor %}
    		                 
@@ -38,7 +38,7 @@
                 {% endfor %}
                 <!-- Side Projects -->
                 {% if lesson.sides != nil %}
-                  {% assign lessonbaseurl = {{lesson.url}} | split: 'index.html' %}
+                  {% assign lessonbaseurl = {{lesson.url}} | split: 'index' %}
    		          <li><a href="javascript:void(0);" onclick="loadOnClick('{{site.baseurl}}{{lessonbaseurl}}','side_projects/sides.html','', true);">Proyectos Adicionales</a></li>
 
    		        {% endif %}
