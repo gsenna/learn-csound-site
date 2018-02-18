@@ -12,7 +12,7 @@
     <ul style="list-style-type:disc">
         {% assign sideprojects = site.lessons | where: "categories", page.sides_folder | sort: "order" %}
         {% for sideproject in sideprojects %}
-          {% assign sideprojectbaseurl = {{sideproject.url}} | split: 'index' %}
+          {% assign sideprojectbaseurl = {{sideproject.url}} | split: 'index/' %}
 				
 				<li><a href="javascript:void(0);" onclick="player.cueVideoById('{{sideproject.yt-video}}'); $('#lesson').animate({scrollTop:0 },'fast'); player.playVideo(); ">Introducción a {{sideproject.title}}</a> | 
 				<a href="javascript:void(0);" onclick="loadMenuAndClick('{{site.baseurl}}{{sideprojectbaseurl}}');">Acceder a {{sideproject.title}}</a></li>
