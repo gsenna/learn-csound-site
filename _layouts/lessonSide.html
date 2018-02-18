@@ -15,7 +15,7 @@
           {% assign sideprojectbaseurl = {{sideproject.url}} | split: 'index' %}
 				
 				<li><a href="javascript:void(0);" onclick="player.cueVideoById('{{sideproject.yt-video}}'); $('#lesson').animate({scrollTop:0 },'fast'); player.playVideo(); ">Introducción a {{sideproject.title}}</a> | 
-				<a href="javascript:void(0);" onclick="alert('{{site.baseurl}}{{sideprojectbaseurl}}');">Acceder a {{sideproject.title}}</a></li>
+				<a href="javascript:void(0);" onclick="loadMenuAndClick('{{site.baseurl}}{{sideprojectbaseurl}}');">Acceder a {{sideproject.title}}</a></li>
  		{% endfor %}
     </ul>
   
