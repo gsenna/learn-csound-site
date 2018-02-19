@@ -4,8 +4,8 @@ title:  "Wavetable Synthesis"
 date:   2014-03-27 17:00:00
 categories: lesson 
 folder: wavetable
-csd: wavetable.csd
-text: wavetable.html
+csd: Introduccion.csd
+text: Introduccion.html
 sides: sides.html
 order: 2
 ---

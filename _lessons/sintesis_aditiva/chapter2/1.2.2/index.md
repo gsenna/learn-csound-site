@@ -1,12 +1,11 @@
 ---
 layout: lesson 
-title:  "Capitulo 1"
-subtitle: "1.1 Intro"
+title:  "2.2 Más Tablas"
 date:   2014-03-27 17:00:00
-categories: wavetable 
-subfolder: wavetable_chapter1
-csd: 2.1.1.csd
-text: 2.1.1.html
+categories: sintesis_aditiva_chapter2
+csd: 1.2.2.csd
+text: 1.2.2.html
 order: 1
 ---
+
 La sintesis aditiva es una tecnica a partir de la suma de armonicos.
