@@ -108,7 +108,7 @@
     <script src="{{site.baseurl}}/js/loader.js"></script>
     <script>
         loadMenu('{{site.baseurl}}');
-        {% assign csdbaseurl = {{page.url}} | split: 'index.html' %}
+        {% assign csdbaseurl = {{page.url}} | split: 'index' %}
         loadOnClick('{{site.baseurl}}{{csdbaseurl}}','{{page.text}}','{{page.csd}}', false);
     </script>
 
