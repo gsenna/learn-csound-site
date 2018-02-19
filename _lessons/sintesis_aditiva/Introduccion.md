@@ -18,8 +18,9 @@ layout: lessonTxt
 1. Instalar el navegador <a href="https://www.google.com.ar/chrome/">Chrome</a> (o <a href="http://dev.chromium.org/getting-involved/download-chromium">Chromium</a>).
 2. Instalar Csound + CsoundQt usando el <a href="http://csound.com/download.html">Instalador Full</a> de Csound.
 3. Se sugiere repasar los conceptos básicos de acústica e informática musical, tales como los mencionados a continuación, utilizando la bibliografía mencionada<sup>(6-8)</sup>: 
-       - Serie armónica; Teorema de Fourier; Señales periódicas; Rango dinámico; Escala log. de dB.
-       - Tasa o Frecuencia de muestreo; DAC; Frecuencia de Nyquist; Aliasing; Frecuencia de corte; Bandas laterales.
+
+      - Serie armónica; Teorema de Fourier; Señales periódicas; Rango dinámico; Escala log. de dB.
+      - Tasa o Frecuencia de muestreo; DAC; Frecuencia de Nyquist; Aliasing; Frecuencia de corte; Bandas laterales.
 
 <br>
 ## B. Bibliografía
