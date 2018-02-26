@@ -1,23 +1,23 @@
-; Abrir y cerrar la sección de código de Csound. 
 ; Tags de apertura y de cierre: <identificador> y </identificador>
-<CsoundSynthesizer>
-  
-; Abrir y cerrar la Orquesta de Csound.
-<CsInstruments>
-
-
-
 ; abrir y cerrar la definición de Hola Mundo.
+</CsoundSynthesizer>
+
 instr 1
-
-
-
-endin
+; Abrir y cerrar la sección de código de Csound. 
 
 
 
 </CsInstruments>
+endin
 
 
 
-</CsoundSynthesizer>
+<CsInstruments>
+
+
+
+; Abrir y cerrar la Orquesta de Csound.
+
+
+
+<CsoundSynthesizer>
