@@ -510,6 +510,7 @@ Main Components
   .cd-accordion-menu ul ul label,
   .cd-accordion-menu ul ul a {
     padding-left: 106px;
+    padding-right: 2px;
   }
   .cd-accordion-menu ul ul label::before {
     left: 48px;
