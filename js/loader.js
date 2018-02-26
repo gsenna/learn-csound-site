@@ -38,7 +38,7 @@
           var client = new XMLHttpRequest();
           client.open('GET', baseUrl + lessonCsd, true);
           client.onreadystatechange = function() {
-            editor.setValue("; Presione ctrl-e para Correr.\n" + client.responseText);
+            editor.setValue(client.responseText);
 
             editor.clearHistory();
           }
