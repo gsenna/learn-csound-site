@@ -14,12 +14,12 @@ endin
 
 
 <CsScore>
-; sentencia_t    p1(0)      p2(bpm)     [p3 p4 ...]
-;      t            0          60
+; instrucción_t    p1(0)      p2(bpm)     [p3 p4 ...]
+;      t              0          60
 
-; sentencia_i  p1(instr)  p2(comienzo)   p3(dur.)   [p4 ...]
-      i             3           0           1
-      i             3           4           1
+; instrucción_i  p1(instr)  p2(comienzo)   p3(dur.)   [p4 ...]
+      i               3           0           1
+      i               3           4           1
 
 <CsScore>
 
