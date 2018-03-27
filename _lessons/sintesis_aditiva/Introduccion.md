@@ -5,7 +5,7 @@ layout: lessonTxt
 
 <br>
 
-<div style="text-align: center;">
+<div class="video-container">
 <!-- <iframe width="600" height="400" src="https://www.youtube.com/embed/BUfHG6lQLWA"></iframe> -->
 <iframe src="https://docs.google.com/file/d/1G3nqC6hJzWuksssTK0V5zqcfoZACTDEq/preview" width="640" height="385" allowfullscreen="true"></iframe>
 </div>
