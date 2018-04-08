@@ -53,7 +53,7 @@ function saveText(){
    const MIME_TYPE = 'application/octet-stream';
    var myBlob = new Blob([txt], {type : MIME_TYPE});
    var a = document.createElement('a'); 
-   a.download =  CSD_PATH;
+   a.download =  "mi_archivo.csd";
    a.href = window.URL.createObjectURL(myBlob);
    a.textContent = 'Click here to save file';
    a.dataset.downloadurl = [MIME_TYPE, a.download, a.href].join(':');
