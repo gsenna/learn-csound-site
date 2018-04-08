@@ -24,6 +24,8 @@ layout: lessonTxt
       - Serie armónica; Teorema de Fourier; Señales periódicas; Rango dinámico; Escala log. de dB.
       - Tasa o Frecuencia de muestreo; DAC; Frecuencia de Nyquist; Aliasing; Frecuencia de corte; Bandas laterales.
 
+4. Guardar una copia de la obra de Boulanger presionando el botón Salvar y subir como adjunto a la Tarea correspondiente utilizando la Plataforma Virtual.
+
 <br>
 
 ## B. Bibliografía
