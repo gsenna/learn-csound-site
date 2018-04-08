@@ -17,7 +17,7 @@ layout: lessonTxt
 
 1. Instalar el navegador <a href="https://www.google.com.ar/chrome/">Chrome</a> (o <a href="http://dev.chromium.org/getting-involved/download-chromium">Chromium</a>).
 
-2. Instalar Csound + CsoundQt usando el <a href="http://csound.com/download.html">Instalador Full</a> de Csound.
+2. Instalar Core Csound + Csound QT (desmarcar Python features) usando el <a href="http://csound.com/download.html">Instalador Full</a> de Csound.
 
 3. Se sugiere repasar los conceptos básicos de acústica e informática musical, tales como los mencionados a continuación, utilizando la bibliografía mencionada<sup>(6-8)</sup>: 
 
