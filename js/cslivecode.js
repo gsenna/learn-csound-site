@@ -93,7 +93,7 @@ function loadCSD(editor, csdFile) {
 function moduleDidLoad() 
 {
     var ld = document.getElementById("loadDiv");
-    if(CSOUND_AUDIO_CONTEXT.state != "running") 
+    if(AudioContext_sr.state != "running") 
             {
 		      if(ld != null)
 		      {
