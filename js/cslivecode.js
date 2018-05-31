@@ -100,12 +100,10 @@ function moduleDidLoad()
                 ld.innerHTML = "Click para ingresar...";
                 ld.addEventListener ("click", function() {
 					AudioContext_sr.resume().then(() => {
+						csound.Csound.resumeAudioContext()
+						ld.remove();
                         console.log('Playback resumed successfully');
                     });
-                     csound.Csound.resumeAudioContext().then(() => {
-                        console.log('Playback resumed successfully');
-                    });
-                    ld.remove();
                 });
 			  }
             } 
