@@ -102,6 +102,9 @@ function moduleDidLoad()
 					AudioContext_sr.resume().then(() => {
                         console.log('Playback resumed successfully');
                     });
+                     window.AudioContext.resume().then(() => {
+                        console.log('Playback resumed successfully');
+                    });
                     ld.remove();
                 });
 			  }
