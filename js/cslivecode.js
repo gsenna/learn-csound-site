@@ -1,7 +1,7 @@
 var cs;
 var youtube_api_init = 0;
 const currentFilePath = "/temp.csd";
-const AudioContext_sr = new (window.AudioContext || window.webkitAudioContext)();
+//const AudioContext_sr = new (window.AudioContext || window.webkitAudioContext)();
 const fileManager = new FileManager(['csd'], 
         function(t) { console.debug(t); });
 
@@ -10,7 +10,7 @@ function evalCode() {
     fileManager.writeStringToFile(currentFilePath,
          txt);
      csound.stop();
-     csound.Csound.setOption("-r" + AudioContext_sr.sampleRate);
+     csound.Csound.setOption("-r" + csound.Csound.getaudioContext().sampleRate);
      csound.CompileCsdText(currentFilePath);
      csound.Play();
     //editor.refresh();
@@ -93,14 +93,13 @@ function loadCSD(editor, csdFile) {
 function moduleDidLoad() 
 {
     var ld = document.getElementById("loadDiv");
-    if(AudioContext_sr.state != "running") 
+    if(csound.Csound.getaudioContext().state != "running") 
             {
 		      if(ld != null)
 		      {
                 ld.innerHTML = "Click para ingresar...";
                 ld.addEventListener ("click", function() {
-					AudioContext_sr.resume().then(() => {
-						csound.Csound.resumeAudioContext()
+			    csound.Csound.getaudioContext().resume().then(() => {
 						ld.remove();
                         console.log('Playback resumed successfully');
                     });
