@@ -124,7 +124,11 @@ var CsoundObj = function() {
     var audioContext = getAudioContext();
     var samplerate = audioContext.sampleRate;
     var compiled = false;
-
+    
+    this.resumeAudioContext = function() {
+		audioContext.resume();
+	};
+	
     this.compileCSD = function(filePath) {
         _prepareRT(csound_obj_);
         _compileCSD(csound_obj_, filePath);

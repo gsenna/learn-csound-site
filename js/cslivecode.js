@@ -102,7 +102,7 @@ function moduleDidLoad()
 					AudioContext_sr.resume().then(() => {
                         console.log('Playback resumed successfully');
                     });
-                     csound.Csound.audioContext.resume().then(() => {
+                     csound.Csound.resumeAudioContext().then(() => {
                         console.log('Playback resumed successfully');
                     });
                     ld.remove();
