@@ -90,12 +90,24 @@ function loadCSD(editor, csdFile) {
 }
 
 
-function moduleDidLoad() {
-
+function moduleDidLoad() 
+{
     var ld = document.getElementById("loadDiv");
-    if(ld != null) {
-      ld.remove();
-    }
+    if(CSOUND_AUDIO_CONTEXT.state != "running") 
+            {
+		      if(ld != null)
+		      {
+                ld.innerHTML = "Click para ingresar...";
+                ld.addEventListener ("click", function() {
+                    ld.remove();
+                });
+			  }
+            } 
+    else 
+            {
+                if(ld != null)
+                    ld.remove();
+            }
 }
 
 
