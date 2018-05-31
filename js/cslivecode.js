@@ -99,6 +99,9 @@ function moduleDidLoad()
 		      {
                 ld.innerHTML = "Click para ingresar...";
                 ld.addEventListener ("click", function() {
+					AudioContext_sr.state.resume().then(() => {
+                        console.log('Playback resumed successfully');
+                    });
                     ld.remove();
                 });
 			  }
