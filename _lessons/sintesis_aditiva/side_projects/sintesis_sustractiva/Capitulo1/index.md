@@ -1,6 +1,6 @@
 ---
 layout: lesson
-title:  "Capitulo 1"
+title:  "1. Ruido Blanco"
 date:   2014-03-27 17:00:00
 categories: sintesis_sustractiva
 subfolder: sintesis_sustractiva_cap1
