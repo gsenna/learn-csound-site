@@ -23,7 +23,7 @@
                       <ul>
                        {% if sublesson.text != nil %}
                          {% assign sublessonbaseurl = {{sublesson.url}} | split: 'index' %}
-   		                 <li><a href="javascript:void(0);" onclick="loadOnClick('{{site.baseurl}}{{sublessonbaseurl}}','{{sublesson.text}}','{{sublesson.csd}}', true);">{{sublesson.title}}</a></li>
+   		                 <li><a href="javascript:void(0);" onclick="loadOnClick('{{site.baseurl}}{{sublessonbaseurl}}','{{sublesson.text}}','{{sublesson.csd}}', true);">{{sublesson.subtitle}}</a></li>
    		               {% endif %}
        
                        {% assign lessonitems = site.lessons | where: "categories", sublesson.subfolder %}

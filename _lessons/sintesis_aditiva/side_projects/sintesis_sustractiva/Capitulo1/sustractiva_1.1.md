@@ -24,6 +24,6 @@ layout: lessonTxt
 
 ## Bibliografía
 
-1. CSD en el editor -> <a href="{{site.baseurl}}/lessons/sintesis_aditiva/side_projects/sintesis_sustractiva//home/guille/Proyectos/CsoundOnlineCourse/learn-csound-site/_lessons/sintesis_aditiva/side_projects/sintesis_sustractiva/Capitulo1/sustractiva_1.1.csd">Síntesis Sustractiva - Ruido Blanco</a>
+1. CSD en el editor -> <a href="{{site.baseurl}}/lessons/sintesis_aditiva/side_projects/sintesis_sustractiva/Capitulo1/sustractiva_1.1.csd">Síntesis Sustractiva - Ruido Blanco</a>
 
 <br>
