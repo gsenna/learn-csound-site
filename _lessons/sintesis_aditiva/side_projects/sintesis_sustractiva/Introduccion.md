@@ -5,7 +5,7 @@ layout: lessonTxt
 # <center> Síntesis Sustractiva </center>
 
 
-La síntesis sustractiva es un método de síntesis de sonido en el que los parciales de una señal de audio (a menudo un sonido rico en armónicos) son atenuados por un filtro para alterar el timbre del sonido. Mientras que la síntesis sustractiva se puede aplicar a cualquier señal de audio, el sonido más comúnmente asociado con la técnica es el de los sintetizadores analógicos de los años 1960 y 1970, en los que los armónicos de formas de onda simples como diente de sierra, pulso u ondas cuadradas se atenúan con un filtro pasa-bajos resonante controlado por voltaje. Muchos sintetizadores digitales, virtuales analógicos y de software usan síntesis sustractiva, a veces en conjunción con otros métodos de síntesis de sonido. [<a href="https://es.wikipedia.org/wiki/S%C3%ADntesis_substractiva">1</a>]
+La síntesis sustractiva es un método de síntesis de sonido en el que los parciales de una señal de audio (a menudo un sonido rico en armónicos) son atenuados por un filtro para alterar el timbre del mismo. Mientras que la síntesis sustractiva se puede aplicar a cualquier señal de audio, el sonido más comúnmente asociado con la técnica es el de los sintetizadores analógicos de los años 1960 y 1970, en el que los armónicos de formas de onda simples como diente de sierra, pulso u ondas cuadradas se atenúan con un filtro pasa-bajos resonante controlado por voltaje. Muchos sintetizadores digitales, virtuales analógicos y de software usan síntesis sustractiva, a veces en conjunción con otros métodos de síntesis de sonido. [<a href="https://es.wikipedia.org/wiki/S%C3%ADntesis_substractiva">1</a>]
 
 <br>
 <hr>
@@ -13,7 +13,7 @@ La síntesis sustractiva es un método de síntesis de sonido en el que los parc
 
 ## 1. Ruido Blanco
 
-1. La síntesis sustractiva nace de la idea de poder crear un sonido nuevo restando amplitud a algunos componentes de sonido, más complejo de aquel que se va a obtener, por medio del uso de filtros. 
+1. La síntesis sustractiva nace de la idea de poder crear un sonido nuevo restando amplitud a algunos componentes de un sonido-fuente, más complejo que aquel que se va a obtener, por medio del uso de filtros. 
 
       - <i>Un <b>filtro</b> es un dispositivo que deja pasar ciertas frecuencias mejor que otras.</i>
 

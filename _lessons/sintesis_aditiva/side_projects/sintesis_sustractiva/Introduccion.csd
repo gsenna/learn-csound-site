@@ -24,9 +24,9 @@ instr 1
  
  
   
-                      out    señal_de_audio (<= 0dbfs)
-;                     out    a1  [,  a2 ... ]
-                      out    asig, asig
+;                     out     señal_de_audio (<= 0dbfs)
+;                     out     a1    [,  a2 ... ]
+                      out     asig,   asig
 endin
 
 
@@ -34,8 +34,8 @@ endin
 
 
 <CsScore>
-; instrucción_i  p1(instr)   p2(t_ataque)   p3(dur.)
-       i              1             0           3
+; instrucción_i  p1(instr)   p2(t_ataque)   p3(dur.)   p4(amp en db)
+       i              1             0           3            -12
 
 </CsScore>
 
