@@ -51,7 +51,7 @@ layout: lessonTxt
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: #4CAF50;
+    background-color: #A9A9A9
     color: white;
 }
 </style>
@@ -88,7 +88,9 @@ layout: lessonTxt
 
 1. El filtro pasa altos actúa de igual modo, pero atenúa en cambio las frecuencias inferiores a la frecuencia de corte (Cf).
 
-2. Dado una Cf de 1000 Hz., obtendremos  la siguiente curva de atenuación:
+2. Para filtrar el Ruido Blanco generado por <a href="http://www.csounds.com/manual/html/rand.html"><i>rand</i></a> utilizaremos en nuestro <b>instrumento 3</b> el opcode <a href="http://www.csounds.com/manual/html/atone.html"><i>atone</i></a> como filtro pasa altos. 
+
+3. Dado una Cf de 1000 Hz., obtendremos  la siguiente curva de atenuación:
 
 <table id="atenuacion">
   <tr>
@@ -112,8 +114,6 @@ layout: lessonTxt
     <td>-18</td>
   </tr>
 </table>
-
-3. Para filtrar el Ruido Blanco generado por <a href="http://www.csounds.com/manual/html/rand.html"><i>rand</i></a> utilizaremos en nuestro <b>instrumento 3</b> el opcode <a href="http://www.csounds.com/manual/html/atone.html"><i>atone</i></a> como filtro pasa altos. 
 
 <br>
 
