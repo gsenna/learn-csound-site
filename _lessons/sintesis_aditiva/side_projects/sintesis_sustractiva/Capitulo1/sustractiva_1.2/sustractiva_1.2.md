@@ -28,23 +28,57 @@ layout: lessonTxt
 
 3. Dado una Cf de 300 Hz., obtendremos  la siguiente curva de atenuación:
 
-<center>
 
 <style>
-.tablelines table, .tablelines td, .tablelines th {
-        border: 1px solid gray;    border-spacing: 2px; 
-        }
+#atenuacion {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#atenuacion td, #atenuacion th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#atenuacion tr:nth-child(even){background-color: #f2f2f2;}
+
+#atenuacion tr:hover {background-color: #ddd;}
+
+#atenuacion th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: right;
+    background-color: #4CAF50;
+    color: white;
+}
 </style>
 
-| Freq  |  Amp  |
-| ----: | ----: |
-| 300   |    0  |
-| 600   |   -6  |
-| 1200  |  -12  |
-| 2400  |  -18  |
-{: .tablelines}
+<table id="atenuacion">
+  <tr>
+    <th>Freq</th>
+    <th>Amp</th>
+  </tr>
+  <tr>
+    <td>300</td>
+    <td>0</td>
+  </tr>
+    <tr>
+    <td>600</td>
+    <td>-6</td>
+  </tr>
+  <tr>
+    <td>1200</td>
+    <td>-12</td>
+  </tr>
+  <tr>
+    <td>2400</td>
+    <td>-18</td>
+  </tr>
 
-</center>
+</table>
+
+
 
 <br>
 
@@ -56,13 +90,7 @@ layout: lessonTxt
 
 3. Dado una Cf de 1000 Hz., obtendremos  la siguiente curva de atenuación:
 
-<style>
-.tablelinesa table, .tablelines td, .tablelines th {
-        border: 1px solid gray;    border-spacing: 2px;
-        }
-</style>
 
-<center>
 
 | Freq  |  Amp  |
 | ----: | ----: |
@@ -70,9 +98,8 @@ layout: lessonTxt
 |  500  |   -6  |
 |  250  |  -12  |
 |  125  |  -18  |
-{: .tablelinesa}
+{: .tablelines}
 
-</center>
 
 <br>
 
