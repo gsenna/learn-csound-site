@@ -51,7 +51,7 @@ layout: lessonTxt
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: #A9A9A9
+    background-color: #A9A9A9;
     color: white;
 }
 </style>
