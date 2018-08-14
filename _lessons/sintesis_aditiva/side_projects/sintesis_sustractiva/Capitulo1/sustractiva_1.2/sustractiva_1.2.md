@@ -28,9 +28,11 @@ layout: lessonTxt
 
 3. Dado una Cf de 300 Hz., obtendremos  la siguiente curva de atenuación:
 
+<center>
+
 <style>
 .tablelines table, .tablelines td, .tablelines th {
-        border: 1px solid;    border-spacing: 2px; border-color: gray; margin-left:auto; margin-right:auto;
+        border: 1px solid gray;    border-spacing: 2px;  margin-left:auto; margin-right:auto;
         }
 </style>
 
@@ -42,6 +44,8 @@ layout: lessonTxt
 | 2400  |  -18  |
 {: .tablelines}
 
+</center>
+
 <br>
 
 ## 3. Filtros Pasa Altos de 1<sup>er</sup> Orden.
@@ -52,6 +56,13 @@ layout: lessonTxt
 
 3. Dado una Cf de 1000 Hz., obtendremos  la siguiente curva de atenuación:
 
+<style>
+.tablelinesa table, .tablelines td, .tablelines th {
+        border: 1px solid gray;    border-spacing: 2px;  margin-left:auto; margin-right:auto;
+        }
+</style>
+
+<center>
 
 | Freq  |  Amp  |
 | ----: | ----: |
@@ -59,9 +70,9 @@ layout: lessonTxt
 |  500  |   -6  |
 |  250  |  -12  |
 |  125  |  -18  |
-{: .tablelines}
+{: .tablelinesa}
 
-
+</center>
 
 <br>
 
