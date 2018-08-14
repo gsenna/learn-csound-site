@@ -32,7 +32,7 @@ layout: lessonTxt
 
 <style>
 .tablelines table, .tablelines td, .tablelines th {
-        border: 1px solid gray;    border-spacing: 2px;  margin-left:auto; margin-right:auto;
+        border: 1px solid gray;    border-spacing: 2px; 
         }
 </style>
 
@@ -58,7 +58,7 @@ layout: lessonTxt
 
 <style>
 .tablelinesa table, .tablelines td, .tablelines th {
-        border: 1px solid gray;    border-spacing: 2px;  margin-left:auto; margin-right:auto;
+        border: 1px solid gray;    border-spacing: 2px;
         }
 </style>
 
