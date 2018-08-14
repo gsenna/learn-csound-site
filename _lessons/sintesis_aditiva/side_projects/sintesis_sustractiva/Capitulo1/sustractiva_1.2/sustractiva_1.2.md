@@ -42,7 +42,9 @@ layout: lessonTxt
 | 600   |   -6  |
 | 1200  |  -12  |
 | 2400  |  -18  |
+
 {: .tablelines}
+
 </center>
 
 <br>
@@ -64,6 +66,7 @@ layout: lessonTxt
 |  250  |  -12  |
 |  125  |  -18  |
 {: .tablelines}
+
 </center>
 
 <br>
