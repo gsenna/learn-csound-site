@@ -58,8 +58,8 @@ layout: lessonTxt
 
 <table id="atenuacion">
   <tr>
-    <th>Freq</th>
-    <th>Amp</th>
+    <th>Freq (Hz)</th>
+    <th>Amp (dB)</th>
   </tr>
   <tr>
     <td>300</td>
@@ -94,8 +94,8 @@ layout: lessonTxt
 
 <table id="atenuacion">
   <tr>
-    <th>Freq</th>
-    <th>Amp</th>
+    <th>Freq (Hz)</th>
+    <th>Amp (dB)</th>
   </tr>
   <tr>
     <td>1000</td>
