@@ -70,7 +70,7 @@ endin
 ; instrucción_i  p1(instr)   p2(t_ataque)   p3(dur.)   p4(amp en db)
        i              1             0           3            -12
        i              2             4           3            -12
-       i              3             7           3            -12
+       i              3             8           3            -12
 
 </CsScore>
 
