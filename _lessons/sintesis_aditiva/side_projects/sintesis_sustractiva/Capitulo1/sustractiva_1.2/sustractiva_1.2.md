@@ -28,6 +28,8 @@ layout: lessonTxt
 
 3. Dado una Cf de 300 Hz., obtendremos  la siguiente curva de atenuación:
 
+<center>
+
 <style>
 .tablelines table, .tablelines td, .tablelines th {
         border: 1px solid black;
@@ -42,6 +44,7 @@ layout: lessonTxt
 | 2400  |  -18  |
 {: .tablelines}
 
+</center>
 
 <br>
 
@@ -54,6 +57,13 @@ layout: lessonTxt
 3. Dado una Cf de 1000 Hz., obtendremos  la siguiente curva de atenuación:
 
 <center>
+
+<style>
+.tablelines table, .tablelines td, .tablelines th {
+        border: 1px solid black;
+        }
+</style>
+
 
 | Freq  |  Amp  |
 | ----: | ----: |
