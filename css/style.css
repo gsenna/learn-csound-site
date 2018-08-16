@@ -442,12 +442,13 @@ Main Components
 .cd-accordion-menu ul a:hover {
   background: #3c3f45;
 }
+/*
 .cd-accordion-menu > li:last-of-type > label,
 .cd-accordion-menu > li:last-of-type > a,
 .cd-accordion-menu > li > ul > li:last-of-type label,
 .cd-accordion-menu > li > ul > li:last-of-type a {
   box-shadow: none;
-
+*/
 }
 .cd-accordion-menu ul label::before {
   left: 36px;
