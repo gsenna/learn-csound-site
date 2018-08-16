@@ -11,7 +11,6 @@ function evalCode() {
          txt);
      csound.stop();
      csound.Csound.setOption("-r" + csound.Csound.getaudioContext().sampleRate);
-     csound.ReadScore("f 0 z");
      csound.CompileCsdText(currentFilePath);
      csound.Play();
     //editor.refresh();
