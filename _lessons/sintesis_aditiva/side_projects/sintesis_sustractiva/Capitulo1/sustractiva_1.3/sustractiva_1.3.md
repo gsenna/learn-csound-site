@@ -8,9 +8,9 @@ layout: lessonTxt
 
 ## 1. Filtros de Orden Superior
 
-1. Un filtro de segundo orden atenúa -12 dB por octava; uno de tercer orden, -18 dB/oct; etc.
+1. Un filtro de <i>segundo orden</i> atenúa <b>-12 dB por octava</b>; uno de <i>tercer orden</i>, <b>-18 dB/oct</b>; etc.
 
-2. Estos casos se realizan conectando varios filtros en serie, es decir la salida del primero es filtrada nuevamente por otro filtro igual y con la misma <i>f</i><sub>c</sub>. A esta configuración también se la conoce como "en cascada".
+2. Estos casos se realizan conectando varios filtros en serie, es decir que la salida del primero es filtrada nuevamente por otro filtro igual y con la misma <i>f</i><sub>c</sub>. A esta configuración también se la conoce como "<i>filtros en cascada</i>".
 
 3. Los instrumentos en nuestro código nos permitirán demostrar el filtrado de ruido blanco con filtros pasa bajos y pasa altos, aumentando el nro. de orden en una secuencia. Las notas en nuestro <i>score</i> activarán por dos segundos a los siguientes instrumentos:
 
