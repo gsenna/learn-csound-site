@@ -12,7 +12,7 @@ layout: lessonTxt
 
 2. A un filtro se envía una señal de entrada, es decir el sonido que queremos modificar. 
 
-3. Luego, podremos definir la operación del filtro. Esto es, cuáles frecuencias serán atenuadas. 
+3. Luego podremos definir la operación del filtro, esto es, cuáles frecuencias serán atenuadas. 
 
 4. La señal filtrada se almacenará en una nueva variable de audio.
 
@@ -20,13 +20,13 @@ layout: lessonTxt
 
 ## 2. Filtros Pasa Bajos de 1<sup>er</sup> Orden.
 
-1. El filtro pasa bajos es un filtro que atenúa las frecuencias superiores a la frecuencia de corte (Cf). Esta atenuación se hará según una determinada curva. Esta curva depende del orden del filtro.
+1. El filtro pasa bajos es un filtro que atenúa las frecuencias superiores a la frecuencia de corte (<i>f</i><sub>c</sub>). Esta atenuación se hará según una determinada curva, que dependerá del orden del filtro.
       
-      - <i>Si el filtro es de primer orden la curva de atenuación bajará <b>6 dB por octava</b><i>. 
+      - <i>Si el filtro es de primer orden la curva de atenuación bajará <b>-6 dB por octava</b><i>. 
 
 2. Para filtrar el Ruido Blanco generado por <a href="http://www.csounds.com/manual/html/rand.html"><i>rand</i></a> utilizaremos en nuestro <b>instrumento 2</b> el opcode <a href="http://www.csounds.com/manual/html/tone.html"><i>tone</i></a> como filtro pasa bajos. 
 
-3. Dado una Cf de 300 Hz., obtendremos  la siguiente curva de atenuación:
+3. Dado una <i>f</i><sub>c</sub> de 300 Hz., obtendremos la siguiente curva de atenuación:
 
 
 <style>
@@ -86,11 +86,11 @@ layout: lessonTxt
 
 ## 3. Filtros Pasa Altos de 1<sup>er</sup> Orden.
 
-1. El filtro pasa altos actúa de igual modo, pero atenúa en cambio las frecuencias inferiores a la frecuencia de corte (Cf).
+1. El filtro pasa altos actúa de igual modo, pero atenúa en cambio las frecuencias inferiores a la frecuencia de corte (<i>f</i><sub>c</sub>).
 
 2. Para filtrar el Ruido Blanco generado por <a href="http://www.csounds.com/manual/html/rand.html"><i>rand</i></a> utilizaremos en nuestro <b>instrumento 3</b> el opcode <a href="http://www.csounds.com/manual/html/atone.html"><i>atone</i></a> como filtro pasa altos. 
 
-3. Dado una Cf de 1000 Hz., obtendremos  la siguiente curva de atenuación:
+3. Dado una <i>f</i><sub>c</sub> de 1000 Hz., obtendremos la siguiente curva de atenuación:
 
 <table id="atenuacion">
   <tr>
