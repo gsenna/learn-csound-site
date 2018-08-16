@@ -14,6 +14,8 @@ layout: lessonTxt
 
 3. Los instrumentos en nuestro código nos permitirán demostrar el filtrado de ruido blanco con filtros pasa bajos y pasa altos, aumentando el nro. de orden en una secuencia. Las notas en nuestro <i>score</i> activarán por dos segundos a los siguientes instrumentos:
 
+      - <i> PASA BAJOS </i>
+      
       - 1) <b>instr 1</b>: ruido blanco.
       
       - 2) <b>instr 2</b>: ruido blanco filtrado con un único filtro pasa bajos <a href="http://www.csounds.com/manual/html/tone.html"><i>tone</i></a>
@@ -21,8 +23,8 @@ layout: lessonTxt
       - 3) <b>instr 3</b>: ruido blanco filtrado con dos filtros pasa bajos <a href="http://www.csounds.com/manual/html/tone.html"><i>tone</i></a> en serie.
 
       - 4) <b>instr 4</b>: ruido blanco filtrado con tres filtros pasa bajos <a href="http://www.csounds.com/manual/html/tone.html"><i>tone</i></a> en serie.
-
-<br>      
+     
+      - <i> PASA ALTOS </i>
       
       - 5) <b>instr 1</b>: ruido blanco.
       
