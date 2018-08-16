@@ -21,6 +21,8 @@ layout: lessonTxt
       - 3) <b>instr 3</b>: ruido blanco filtrado con dos filtros pasa bajos <a href="http://www.csounds.com/manual/html/tone.html"><i>tone</i></a> en serie.
 
       - 4) <b>instr 4</b>: ruido blanco filtrado con tres filtros pasa bajos <a href="http://www.csounds.com/manual/html/tone.html"><i>tone</i></a> en serie.
+
+<br>      
       
       - 5) <b>instr 1</b>: ruido blanco.
       
