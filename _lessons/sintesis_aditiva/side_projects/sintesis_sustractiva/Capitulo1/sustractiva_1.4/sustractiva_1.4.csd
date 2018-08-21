@@ -122,7 +122,7 @@ instr 6 ; Pasa banda de IV  orden con glissando.
 ; Filtro pasa banda aplicado a la señal asig.
 ;  afilt    reson      a1,       xCf,     xbw
    afilt    reson    asig,       kCf,       1
-   afilt2   reson   afilt,       kCd,       1
+   afilt2   reson   afilt,       kCf,       1
 
              out   afilt/90000,     afilt/90000
 endin
@@ -182,7 +182,7 @@ instr 9 ; Reescalamiento usando el opcode balance (RMS).
 ;       ares    balance     asig,      acomp
    abalanced    balance    afilt,       asig
 
-             out   abalanced,       abalanced
+             out   abalanced,      abalanced
 endin
 
 
