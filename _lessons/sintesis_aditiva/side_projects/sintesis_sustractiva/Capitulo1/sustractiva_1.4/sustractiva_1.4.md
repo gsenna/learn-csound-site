@@ -28,13 +28,11 @@ layout: lessonTxt
 
       - A) dividiendo la señal filtrada por algún coeficiente determinado (que habrá que obtener a prueba y error).
 
-      - B) utlizando el tercer parámetro opcional de <a href="http://www.csounds.com/manual/html/reson.html"><i>reson</i></a>, invocando la opción de reescalamiento:
-      
-            - Si utilizamos aquí el valor 1: se reescala la amplitud de la señal de salida de modo tal que la amplitud de pico del sonido filtrado sea la misma que la de la señal de entrada.
+      - B) invocando la opción de reescalamiento de <a href="http://www.csounds.com/manual/html/reson.html"><i>reson</i></a>, pasando el valor <b>1</b> como argumento para el tercer parámetro (que es opcional). En este caso se reescala la amplitud de la señal de salida de modo tal que la amplitud de pico del sonido filtrado sea la misma que la de la señal de entrada.
 
-            - En cambio, con el valor <b>2</b>: se reescala la amplitud de la señal de salida de modo tal que el valor eficaz (RMS) de la señal filtrada sea el mismo que el de la entrante.
+      - C) invocando la opción de reescalamiento de <a href="http://www.csounds.com/manual/html/reson.html"><i>reson</i></a>, pasando el valor <b>2</b> como argumento para el tercer parámetro (que es opcional). En este caso se reescala la amplitud de la señal de salida de modo tal que el valor eficaz (RMS) de la señal filtrada sea el mismo que el de la entrante.
       
-      - C) También es posible utilizar el opcode <a href="http://www.csounds.com/manual/html/balance.html"><i>balance</i></a> para reescalar la señal utilizando como comparador a la señal original.
+      - D) También es posible utilizar el opcode <a href="http://www.csounds.com/manual/html/balance.html"><i>balance</i></a> para reescalar la señal filtrada utilizando como comparador a la señal original.
 
 <br>
 
