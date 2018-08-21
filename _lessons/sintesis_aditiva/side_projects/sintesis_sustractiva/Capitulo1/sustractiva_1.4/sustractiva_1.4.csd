@@ -51,7 +51,7 @@ instr 3 ; Ruido Blanco filtrado con pasa banda de IV orden.
    afilt2   reson    afilt,     1800,     400
 
 ; Debemos incrementar el coeficiente de atenuación. 
-             out   afilt2/300,   afilt2/300
+             out   afilt2/900,   afilt2/900
 endin
 
 
@@ -70,14 +70,14 @@ instr 4 ; Pasa banda de IV orden y ancho de banda variable.
   asig     rand    iAmp,       iSemilla
   
 ; Control de bw:     va,        dur,      vb
-   kbw    expseg   1000,       p3-2,      1,     
-                                  2,      1     
+   kbw    expseg   1000,       p3-1,       1,     
+                                  1,       1     
 ; Filtro pasa banda aplicado a la señal asig.
 ;  afilt    reson      a1,       xCf,     xbw
    afilt    reson    asig,       800,     kbw
    afilt2   reson   afilt,       800,     kbw
 
-             out   afilt/9000000,     afilt/9000000
+             out   afilt/450,     afilt/450
 endin
 
 
@@ -88,15 +88,15 @@ instr 5 ; Igual al instr 4, pero con variación dinámica del coeficiente.
 
   asig     rand    iAmp,       iSemilla
   
-; Control de bw:        va,        dur,      vb
-      kbw    expseg   1000,       p3-1,      1,
-                                     1,      1
+; Control de bw:        va,        dur,         vb
+      kbw    expseg   1000,       p3-1,          1,
+                                     1,          1
                                      
 ; Con esta señal compensaremos el incremento de la amplitud 
 ; mientras se estrecha el ancho de banda. 
 ; Control del coef.:     va,        dur,           vb
-    kcoef    expseg   9000,       p3-1,      9000000,
-                                     1,      9000000
+    kcoef    expseg   100,       p3-1,            600,
+                                    1,            600
                          
 ; Filtro pasa banda aplicado a la señal asig.
 ;  afilt    reson      a1,       xCf,     xbw
@@ -115,16 +115,16 @@ instr 6 ; Pasa banda de IV  orden con glissando.
 
   asig     rand    iAmp,       iSemilla
   
-; Control de Cf:        va,        dur,      vb
-      kCf   expseg      50,         p3,   10000          
-                                     
-                         
+; Control de Cf:        va,        dur,          vb
+      kCf   expseg      50,         p3,       10000          
+
+                      
 ; Filtro pasa banda aplicado a la señal asig.
 ;  afilt    reson      a1,       xCf,     xbw
    afilt    reson    asig,       kCf,       1
    afilt2   reson   afilt,       kCf,       1
 
-             out   afilt/90000,     afilt/90000
+             out   afilt/3000,     afilt/3000
 endin
 
 
@@ -182,7 +182,8 @@ instr 9 ; Reescalamiento usando el opcode balance (RMS).
 ;       ares    balance     asig,      acomp
    abalanced    balance    afilt,       asig
 
-             out   abalanced,      abalanced
+
+             out   abalanced,       abalanced
 endin
 
 
