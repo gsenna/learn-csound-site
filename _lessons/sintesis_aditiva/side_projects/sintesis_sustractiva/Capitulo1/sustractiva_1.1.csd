@@ -19,7 +19,7 @@ instr 1
   
 ;                     out     señal_de_audio (<= 0dbfs)
 ;                     out     a1    [,  a2 ... ]
-                      out     asig,   asig
+                      out     asig
 endin
 
 

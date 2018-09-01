@@ -12,7 +12,7 @@ instr 1 ; Ruido Blanco
 ; Generador de Ruido Blanco
   asig     rand    iAmp,       iSemilla
   
-            out    asig,       asig
+            out    asig
 endin
 
 
@@ -34,7 +34,7 @@ instr 2 ; Ruido Blanco filtrado con pasa banda
 ;  afilt    reson      a1,       xCf,     xbw
    afilt    reson    asig,      1800,     400
 
-             out   afilt/18,     afilt/18
+             out   afilt/18
 endin
 
 
@@ -51,7 +51,7 @@ instr 3 ; Ruido Blanco filtrado con pasa banda de IV orden.
    afilt2   reson    afilt,     1800,     400
 
 ; Debemos incrementar el coeficiente de atenuación. 
-             out   afilt2/900,   afilt2/900
+             out   afilt2/900
 endin
 
 
@@ -77,7 +77,7 @@ instr 4 ; Pasa banda de IV orden y ancho de banda variable.
    afilt    reson    asig,       800,     kbw
    afilt2   reson   afilt,       800,     kbw
 
-             out   afilt/450,     afilt/450
+             out   afilt/450
 endin
 
 
@@ -103,7 +103,7 @@ instr 5 ; Igual al instr 4, pero con variación dinámica del coeficiente.
    afilt    reson    asig,       800,     kbw
    afilt2   reson   afilt,       800,     kbw
 
-             out   afilt/kcoef,     afilt/kcoef
+             out   afilt/kcoef
 endin
 
 
@@ -124,7 +124,7 @@ instr 6 ; Pasa banda de IV  orden con glissando.
    afilt    reson    asig,       kCf,       1
    afilt2   reson   afilt,       kCf,       1
 
-             out   afilt/3000,     afilt/3000
+             out   afilt/3000
 endin
 
 
@@ -147,7 +147,7 @@ instr 7 ; Reescalamiento usando la amplitud de pico.
    afilt    reson    asig,      1800,     400,             1
 
 
-             out   afilt,       afilt
+             out   afilt
 endin
 
 
@@ -163,7 +163,7 @@ instr 8 ; Reescalamiento usando la amplitud RMS.
    afilt    reson    asig,      1800,     400,             2
 
 
-             out   afilt,       afilt
+             out   afilt
 endin
 
 
@@ -183,7 +183,7 @@ instr 9 ; Reescalamiento usando el opcode balance (RMS).
    abalanced    balance    afilt,       asig
 
 
-             out   abalanced,       abalanced
+             out   abalanced
 endin
 
 

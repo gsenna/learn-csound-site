@@ -12,7 +12,7 @@ instr 1 ; Ruido Blanco
 ; Generador de Ruido Blanco
   asig     rand    iAmp,       iSemilla
   
-            out    asig,       asig
+            out    asig
 endin
 
 
@@ -34,7 +34,7 @@ instr 2 ; Ruido Blanco filtrado con pasa bajos
 ;  afilt    tone      a1,            kCf
    afilt    tone    asig,            300   ; La Freq de Corte es 300Hz.
 
-             out   afilt,     afilt
+             out   afilt
 endin
 
 instr 3 ; Ruido Blanco filtrado con 2 pasa bajos en cascada
@@ -49,7 +49,7 @@ instr 3 ; Ruido Blanco filtrado con 2 pasa bajos en cascada
    afilt    tone    asig,            300   ; La Freq de Corte es 300Hz.
   afilt2    tone   afilt,            300   ; La Freq de Corte es 300Hz.
 
-             out  afilt2,     afilt2
+             out  afilt2
 endin
 
 instr 4 ; Ruido Blanco filtrado con 3 pasa bajos en cascada
@@ -65,7 +65,7 @@ instr 4 ; Ruido Blanco filtrado con 3 pasa bajos en cascada
   afilt2    tone   afilt,            300   ; La Freq de Corte es 300Hz.
   afilt3    tone  afilt2,            300   ; La Freq de Corte es 300Hz.
 
-             out  afilt3,     afilt3
+             out  afilt3
 endin
 
 
@@ -88,7 +88,7 @@ instr 5 ; Ruido Blanco filtrado con pasa altos
 ;  afilt   atone      a1,            kCf
    afilt   atone    asig,           1000   ; La Freq de Corte es 1000Hz.
 
-             out   afilt,     afilt
+             out   afilt
 endin
 
 
@@ -104,7 +104,7 @@ instr 6 ; Ruido Blanco filtrado con 2 pasa altos en cascada.
    afilt   atone    asig,           1000   ; La Freq de Corte es 1000Hz.
    afilt2  atone   afilt,           1000   ; La Freq de Corte es 1000Hz.
 
-             out   afilt2,    afilt2
+             out   afilt2
 endin
 
 
@@ -121,7 +121,7 @@ instr 7 ; Ruido Blanco filtrado con 3 pasa altos en cascada.
    afilt2  atone   afilt,           1000   ; La Freq de Corte es 1000Hz.
    afilt3  atone  afilt2,           1000   ; La Freq de Corte es 1000Hz.
 
-             out   afilt3,    afilt3
+             out   afilt3
 endin
 
 

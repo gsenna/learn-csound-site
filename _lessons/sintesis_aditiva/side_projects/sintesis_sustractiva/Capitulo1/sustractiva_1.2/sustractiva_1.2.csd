@@ -12,7 +12,7 @@ instr 1 ; Ruido Blanco
 ; Generador de Ruido Blanco
   asig     rand    iAmp,       iSemilla
   
-            out    asig,       asig
+            out    asig
 endin
 
 
@@ -32,7 +32,7 @@ instr 2 ; Ruido Blanco filtrado con pasa bajos
 
 
 ; Salida de la señal filtrada.
-            out    afilt,       afilt
+            out    afilt
 endin
 
 
@@ -52,7 +52,7 @@ instr 3 ; Ruido Blanco filtrado con pasa altos
 
 
 ; Salida de la señal filtrada.
-            out    afilt,       afilt
+            out    afilt
 endin
 
 
