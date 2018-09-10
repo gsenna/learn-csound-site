@@ -77,7 +77,7 @@ instr 4 ; Pasa banda de IV orden y ancho de banda variable.
    afilt    reson    asig,       800,     kbw
    afilt2   reson   afilt,       800,     kbw
 
-             out   afilt/450
+             out   afilt2/15000000
 endin
 
 
@@ -95,15 +95,15 @@ instr 5 ; Igual al instr 4, pero con variación dinámica del coeficiente.
 ; Con esta señal compensaremos el incremento de la amplitud 
 ; mientras se estrecha el ancho de banda. 
 ; Control del coef.:     va,        dur,           vb
-    kcoef    expseg   100,       p3-1,            600,
-                                    1,            600
+    kcoef    expseg     900,        p3-1,         30000000,
+                                       1,         30000000
                          
 ; Filtro pasa banda aplicado a la señal asig.
 ;  afilt    reson      a1,       xCf,     xbw
    afilt    reson    asig,       800,     kbw
    afilt2   reson   afilt,       800,     kbw
 
-             out   afilt/kcoef
+             out   afilt2/kcoef
 endin
 
 
@@ -124,7 +124,7 @@ instr 6 ; Pasa banda de IV  orden con glissando.
    afilt    reson    asig,       kCf,       1
    afilt2   reson   afilt,       kCf,       1
 
-             out   afilt/3000
+             out   afilt2/600000000
 endin
 
 
@@ -208,3 +208,4 @@ endin
 
 
 </CsoundSynthesizer>
+
