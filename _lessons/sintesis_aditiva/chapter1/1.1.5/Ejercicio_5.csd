@@ -60,7 +60,7 @@ endin
 ;      t              0           120
 
 ; instrucción_i  p1(instr)   p2(t_ataque)   p3(dur.)     p4(amp.)     p5(freq.)
-       i              1             0           3           -10          440
+       i              1             0           2           -10          440
        i              1             2           2           -40          660
 
 </CsScore>
