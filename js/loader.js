@@ -27,7 +27,14 @@
 	}
   });
 
+  window.audioCtx = null;
+
   function loadOnClick(baseUrl, lessonHtml, lessonCsd, onpageload) {
+      console.log(baseUrl, lessonHtml, lessonCsd);
+      screenTest(null);
+      if (window.audioCtx) {
+         window.audioCtx.close() 
+      }      
       console.log(baseUrl, lessonHtml, lessonCsd);
       var clientTxt = new XMLHttpRequest();
       clientTxt.open('GET', baseUrl + lessonHtml, true);
@@ -51,7 +58,20 @@
       clientTxt.send();
 	  }
       
-     
+     var mql = window.matchMedia('(min-width: 800px)');
+
+function screenTest(e) {
+         $('#editor-container').css("width", "");
+          $('#dragbar').css("left", "");
+          $('#lesson').css("width", "");
+       $('#ResetButton').css("display", '');
+      $('#CompileButton').css("display", '');
+      $('#SaveTextButton').css("display", '');
+      $('#RenderButton').css("display", '');
+
+}
+
+mql.addListener(screenTest);
       
       function loadMenu(baseUrlMenu) {
       var client = new XMLHttpRequest();

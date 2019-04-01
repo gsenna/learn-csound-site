@@ -76,9 +76,12 @@ let editor = CodeMirror.fromTextArea(
         mode: "csound",
         //keyMap: "vim",
 		extraKeys: {
-			"Ctrl-E": evalCode,
+			"Ctrl-E": saveText,
 		},
 	});
+
+var $wrapper = $(editor.getWrapperElement());
+$wrapper.addClass('CodeMirror-absolute'); // hides cursor
 
 function loadCSD(editor, csdFile) {
   var client = new XMLHttpRequest();
@@ -98,7 +101,7 @@ function moduleDidLoad()
             {
 		      if(ld != null)
 		      {
-                ld.innerHTML = "Click para ingresar...";
+                ld.innerHTML = "<b>C l i c k &nbsp;  p a r a &nbsp; I n g r e s a r . . .</b>";
                 ld.addEventListener ("click", function() {
 			    csound.Csound.getaudioContext().resume().then(() => {
 						ld.remove();
@@ -134,14 +137,23 @@ $('#dragbar').mousedown(function(e){
           var f = $('#editor-container').outerWidth(true) / $('#editor-container').parent().outerWidth(true) * 100;
           $('#lesson').css("width", (99 - f) + '%');
           //$('#lesson').css("left", f + '%');
-            $('.controls').css("width", (99 - f) + '%');
-            $('.controls').css("left", (f+0.2) + '%');
-          
-       })
+          //$('.controls').css("width", (99 - f) + '%');
+          //$('.controls').css("left", (f+0.2) + '%');
+          AdjustIframeHeight();
+        })
 });
+
+function AdjustIframeHeight() { 
+	if($('#form-iframe').length) {
+	   document.getElementById("form-iframe").style.height = document.getElementById("form-iframe").contentWindow.document.body.scrollHeight + "px"; 
+   }
+}
 
 $(document).mouseup(function(e){
        $(document).unbind('mousemove');
 });
+
+
+
 
 
