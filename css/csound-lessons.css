@@ -36,12 +36,18 @@
   float: left;
 }
 
-.CodeMirror {
+.CodeMirror-absolute {
   position: absolute;
   top: 10px;
   /*bottom: 0;*/
   height: 100%;
   left: 0;
+  width: 100%;
+}
+
+.CodeMirror-answer {
+  border: 1px solid #eee;
+  height: auto;
   width: 100%;
 }
 
@@ -161,4 +167,36 @@
  color: white;
  font-family: Monospace;
 }
+.paginationDiv {
+  text-align: center;
+  margin-top: 10px;
+}
+.pagination {
+  display: inline-block;
+}
 
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
