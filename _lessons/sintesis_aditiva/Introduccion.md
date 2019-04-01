@@ -2,41 +2,14 @@
 layout: lessonTxt
 ---
 
-# <center>1.1 ¿Qué es Csound?</center>
+# <center> Introducción</center>
 
 <br>
 <div class="video-container">
-<iframe src="https://docs.google.com/file/d/1D_X6Iuwuml41OeEGoM78rJaSPld5udth/preview" width="640" height="385" allowfullscreen="true"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YsZKvLnf7wU" allowfullscreen></iframe>
 </div>
 <br>
 <hr>
 <br>
 
-## A. Ejercicios
 
-1. Limpiar el editor de texto. Descargar el siguiente <a href="{{site.baseurl}}/lessons/sintesis_aditiva/chapter1/Ejercicio_1.csd">Archivo Unificado de Csound</a>. Probar "arrastrar y soltar" el archivo sobre el editor; en su defecto, copiar y pegar el contenido manualmente.
-
-2. Reordenar las líneas del archivo anterior para reflejar el orden correcto del código mínimo legalmente válido.
-
-3. Responder a las siguientes preguntas agregando comentarios al comienzo del código reordenado en el punto 2):
-
-      - a) ¿Cómo se llaman los programas que permiten cargar a Csound en la memoria y ejecutar su código?
-      
-      - b) <b>Situación hipotética:</b> Presionamos el botón Correr y escuchamos artefactos extraños en el audio. Luego de descartar errores propios, concluimos que el problema reside en que nuestra computadora no cuenta con los recursos suficientes como para sintetizar el audio en tiempo real, ¿qué podríamos hacer para eludir este déficit? 
-     
-      - c) En nuestro instrumento <i>Hola Mundo</i>, ¿qué parámetros de la onda representan los valores 10000, 440 y 0?
-
-      
-4. Salvar el trabajo y subir como adjunto a la Tarea correspondiente utilizando la Plataforma Virtual.
-
-<br>
-
-## B. Bibliografía
-
-1. <a href="https://codemirror.net/">CodeMirror</a>
-2. <a href="https://csoundqt.github.io/">CsoundQt</a>
-3. <a href="http://cabbageaudio.com/">Cabbage</a>
-4. <a href="http://blue.kunstmusik.com/">Blue</a>
-5. CSD -> <a href="{{site.baseurl}}/lessons/sintesis_aditiva/chapter1/1.1.1.csd">1.1: ¿Qué es Csound?</a>
-
-<br>
