@@ -10,8 +10,8 @@ layout: lessonTxt
   <a href="#">3</a>
   <a href="#">4</a>
   <a href="#">5</a>
-  <a href="#">E</a>
-  <a href="#">&raquo;</a>
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_aditiva/chapter1/1.1.1/f/', '1.1.1-f.html','', false)" href="javascript:void(0);">E</a>
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_aditiva/chapter1/1.1.1/a/', '1.1.1-a.html','', false)" href="javascript:void(0);">&raquo;</a>
 </div>
 </div>
 <hr>
