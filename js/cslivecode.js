@@ -7,7 +7,7 @@ const fileManager = new FileManager(['csd'],
 
 function evalCode() {
     var txt = editor.getValue();
-    txt = txt.replace(/<CsScore>/, '<CsScore>\nf 0 z\n');
+    txt = txt.replace(/<\/CsScore>/, 'f 0 z\n</CsScore>\n');
     fileManager.writeStringToFile(currentFilePath,
          txt);
      csound.stop();
