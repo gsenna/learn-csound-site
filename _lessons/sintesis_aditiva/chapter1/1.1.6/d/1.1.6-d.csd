@@ -17,9 +17,6 @@ instr 2
         kFrq      poscil        iFrq,      1/p3,     iFrqFt
         aOsc      poscil        kAmp,      kFrq,      iWfFt
 
-;    a1    a2      pan2      variable_a        pos(L:0-R:1) 
-
-
 ;                   out      variable_a        
                     out         aOsc
 endin
@@ -33,7 +30,7 @@ endin
     f          2           0        8193        7      0   2048     1     4097    1   2048   0
     f          3           0        8193       -5    0.5   2048     1     4097    1   2048   2
 
-; instru. p1(instr)  p2(start)   p3(dur)   p4(dBFS)   p5(Freq)  p6(WfFt)  p7(AmpFt)  p8(FrqFt)   p9(PanFt)
+; instru. p1(instr)  p2(start)   p3(dur)   p4(dBFS)   p5(Freq)  p6(WfFt)  p7(AmpFt)  p8(FrqFt)
     i          2          0          3        -12        440        1          2          3
 </CsScore>
 
