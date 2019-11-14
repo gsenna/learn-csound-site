@@ -1,0 +1,200 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Sliders</title>
+</head>
+
+
+<body style="margin:0; text-align:center;">
+
+<div id="synth"> 
+  <p>
+    <input type="range" name="I1" id="I1" step="0.01" value="0" min="0" max="100" style="width: 100%;"
+           oninput="IOut1.value = I1.value"> I - 
+    <output name="IOut1" id="IOut1">0</output>
+  </p>
+  <p>
+    <input type="range" name="rcm1" id="rcm1" step="0.01" value="2" min="0.001" max="32" style="width: 100%;"
+           oninput="rcmOut1.value = rcm1.value"> r<sub>cm</sub> - 
+    <output name="rcmOut1" id="rcmOut1">2</output>
+  </p>
+  <p>
+    <input type="range" name="I2" id="I2" step="0.01" value="0" min="0" max="100" style="width: 100%;"
+           oninput="IOut2.value = I2.value"> I - 
+    <output name="IOut2" id="IOut2">0</output>
+  </p>
+  <p>
+    <input type="range" name="rcm2" id="rcm2" step="0.01" value="2" min="0.001" max="32" style="width: 100%;"
+           oninput="rcmOut2.value = rcm2.value"> r<sub>cm</sub> - 
+    <output name="rcmOut2" id="rcmOut2">2</output>
+  </p>
+  <p>
+    <select id="combobox">
+     <option value="-1">OFF</option>
+     <option value="1">ON - Paralelo</option>
+     <option value="2">ON - Serie</option>
+    </select>
+  </p>
+  <p>
+    <input type="range" name="amp" id="amp" step="0.01" value="0.5" min="0" max="1" style="width: 100%;"
+           oninput="ampOut.value = amp.value"> Amp - 
+    <output name="ampOut" id="ampOut">0.5</output>
+  </p>
+  <p>
+    <input type="range" name="fc" id="fc" step="0.01" value="440" min="20" max="8000" style="width: 100%;"
+           oninput="fcOut.value = fc.value"> f<sub>c</sub> - 
+    <output name="fcOut" id="fcOut">440</output> Hz
+  </p>
+</div>
+
+<div>
+    <canvas id='scope' width=200 height=80></canvas>
+    <canvas id='spectrum' width=200 height=80></canvas>
+</div>
+
+<script src="/learn-csound-site/js/analyser.js"></script>
+
+
+<script type="text/javascript">
+
+window.parent.csound.stop();
+
+
+
+// attach callbacks to sliders
+function attachListeners() {
+   document.getElementById("I1").addEventListener("input",SetI1);   
+   document.getElementById("rcm1").addEventListener("input",SetRcm1);   
+   document.getElementById("I2").addEventListener("input",SetI2);   
+   document.getElementById("rcm2").addEventListener("input",SetRcm2);   
+   document.getElementById("amp").addEventListener("input",SetAmp);
+   document.getElementById("fc").addEventListener("input",SetFc);
+}
+
+
+// set amplitude
+function SetI1(){
+  SetParam('I1');
+}
+
+// set fundamental
+function SetRcm1(){
+  SetParam('rcm1');
+}
+
+// set amplitude
+function SetI2(){
+  SetParam('I2');
+}
+
+// set fundamental
+function SetRcm2(){
+  SetParam('rcm2');
+}
+
+// set amplitude
+function SetAmp(){
+  SetParam('amp');
+}
+
+// set fundamental
+function SetFc(){
+  SetParam('fc');
+}
+
+
+// set parameter
+function SetParam(name) {
+  var val = document.getElementById(name).value;
+  window.parent.csound.setControlChannel(name, val);
+}
+
+function pause() {
+ if(document.getElementById('combobox').value == "-1") {
+  window.parent.csound.stop();
+  window.parent.csound.started=false;
+  console.log("pause");
+ } 
+ else {
+  var txt = `
+   <CsoundSynthesizer>
+
+   <CsInstruments>
+
+   0dbfs = 1
+   giSine ftgen 1, 0, 16384, 10, 1
+   
+   
+   
+   instr 1
+     kI1    chnget  "I1"
+     krcm1  chnget  "rcm1"
+     kI2    chnget  "I2"
+     krcm2  chnget  "rcm2"
+     kamp   chnget  "amp"
+     kfc    chnget  "fc"
+
+     kI1    port    kI1, 0.01
+     krcm1  port    krcm1, 0.01
+     kI2    port    kI2, 0.01
+     krcm2  port    krcm2, 0.01
+     kamp   port    kamp, 0.01
+     kfc    port    kfc, 0.01
+     
+    aMod1   poscil      kI1*(kfc/krcm1),         (kfc/krcm1),          1
+    aMod2   poscil      kI2*(kfc/krcm2),         (kfc/krcm2),          1
+    asig    poscil      kamp,     kfc+aMod1+aMod2,          1
+ 
+         out asig
+    endin
+    
+    
+     instr 2
+     kI1    chnget  "I1"
+     krcm1  chnget  "rcm1"
+     kI2    chnget  "I2"
+     krcm2  chnget  "rcm2"
+     kamp   chnget  "amp"
+     kfc    chnget  "fc"
+
+     kI1    port    kI1, 0.01
+     krcm1  port    krcm1, 0.01
+     kI2    port    kI2, 0.01
+     krcm2  port    krcm2, 0.01
+     kamp   port    kamp, 0.01
+     kfc    port    kfc, 0.01
+     
+    aMod1   poscil      kI1*(kfc/krcm1),         (kfc/krcm1),          1
+    aMod2   poscil      kI2*(kfc/krcm2),   aMod1+(kfc/krcm2),          1
+    asig   poscil                  kamp,           kfc+aMod2,          1
+ 
+         out asig
+    endin
+    
+    
+    
+   </CsInstruments>
+   <CsScore>
+   </CsScore>
+   </CsoundSynthesizer>
+  `
+  window.parent.csound.stop();
+  window.parent.csound.Csound.setOption("-r" + window.parent.csound.Csound.getaudioContext().sampleRate);
+  window.parent.csound.CompileCsdText(txt);
+  window.parent.csound.Event("i" + document.getElementById('combobox').value + " 0 -1");
+   
+  SetParam("I1");
+  SetParam("rcm1");
+  SetParam("I2");
+  SetParam("rcm2");
+  SetParam("amp");
+  SetParam("fc");
+  window.parent.csound.Play();
+ }
+}
+attachListeners();
+document.getElementById('combobox').addEventListener('change', pause);
+</script>
+</body> </html>
+
