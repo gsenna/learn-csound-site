@@ -122,11 +122,16 @@ var CsoundObj = function() {
     };
 
     var audioContext = getAudioContext();
+    var analyser = audioContext.createAnalyser();
     var samplerate = audioContext.sampleRate;
     var compiled = false;
     
     this.getaudioContext = function() {
 		return audioContext;
+	};
+	
+	this.getaudioAnalyser = function() {
+		return analyser;
 	};
 	
     this.compileCSD = function(filePath) {
@@ -311,6 +316,8 @@ var CsoundObj = function() {
             }
         }
         audioProcessNode.connect(audioContext.destination);
+        audioProcessNode.connect(analyser);
+
         audioProcessNode.onaudioprocess = function(audioProcessEvent) {
             var inputBuffer = audioProcessEvent.inputBuffer;
             var outputBuffer = audioProcessEvent.outputBuffer;
