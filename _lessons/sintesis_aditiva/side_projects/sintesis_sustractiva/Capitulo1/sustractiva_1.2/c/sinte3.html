@@ -1,0 +1,336 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Sliders</title>
+</head>
+
+
+<body style="margin:0; text-align:center;">
+
+<div id="synth"> 
+  <p>
+    <input type="range" name="amplitud" id="amp" step="0.01" value="0.5" min="0" max="1" style="width: 100%;"
+           oninput="ampOut.value = amp.value"> Amplitud - 
+    <output name="ampOut" id="ampOut">0.5</output>
+  </p>
+  <p>
+    <input type="range" name="frequency" id="freq" step="0.01" value="440" min="20" max="8000" style="width: 100%;"
+           oninput="freqOut.value = freq.value"> Frecuencia - 
+    <output name="freqOut" id="freqOut">440</output> Hz
+  </p>
+  <p> 
+    <input type="range" name="pw" id="pw" step="0.01" value="0.5" min="0" max="1" style="width: 100%;"
+           oninput="pwOut.value = pw.value"> VCO2 - Ancho de Pulso - 
+    <output name="pwOut" id="pwOut">0.5</output> 
+  </p>
+  <p> 
+    <input type="range" name="amonicos" id="armonicos" step="1" value="1" min="1" max="50" style="width: 100%;"
+           oninput="armonicosOut.value = armonicos.value"> BUZZ - Número de Armónicos - 
+    <output name="armonicosOut" id="armonicosOut">1</output> 
+  </p>
+  <p>
+    <select id="combobox">
+     <option value="-1">OFF</option>
+     <option value="0">Ruido Blanco</option>
+     <option value="1">Ruido Rosa</option>
+     <option value="2">Tren de Pulsos</option>
+     <option value="3">Tren de Impulsos</option>
+     <option value="4">Diente de Sierra</option>
+     <option value="5">Cuadrada</option>
+     <option value="6">Rnd31</option>
+    </select>
+    <select id="balance">
+     <option value="0">balance OFF</option>
+     <option value="1">balance ON</option>
+    </select>
+  </p>
+ 
+  <p>
+   <div style="float:left;">
+    <input type="range" name="filter-gain1" id="gain1" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut1.value = (1/54 * (Math.exp(8.0146 * gain1.value)-1)); gainOutV1.value = parseFloat(gainOut1.value).toFixed(2);"> <p>80 -
+    <output name="gainOutV1" id="gainOutV1">1</output>
+    <output name="gainOut1" id="gainOut1" style="display:none;">1</output></p>
+   </div>
+
+   <div style="float:left;">
+    <input type="range" name="filter-gain2" id="gain2" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut2.value = (1/54 * (Math.exp(8.0146 * gain2.value)-1)); gainOutV2.value = parseFloat(gainOut2.value).toFixed(2);"> <p>200 - 
+    <output name="gainOutV2" id="gainOutV2">1</output>
+    <output name="gainOut2" id="gainOut2" style="display:none;">1</output></p>
+   </div>
+
+   <div style="float:left;">
+    <input type="range" name="filter-gain3" id="gain3" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut3.value = (1/54 * (Math.exp(8.0146 * gain3.value)-1)); gainOutV3.value = parseFloat(gainOut3.value).toFixed(2);">  <p>500 - 
+    <output name="gainOutV3" id="gainOutV3">1</output>
+    <output name="gainOut3" id="gainOut3" style="display:none;">1</output></p>
+   </div>
+
+   <div style="float:left;">
+    <input type="range" name="filter-gain4" id="gain4" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut4.value = (1/54 * (Math.exp(8.0146 * gain4.value)-1)); gainOutV4.value = parseFloat(gainOut4.value).toFixed(2);">  <p>1000 - 
+    <output name="gainOutV4" id="gainOutV4">1</output>
+    <output name="gainOut4" id="gainOut4" style="display:none;">1</output></p>
+   </div>
+
+   <div style="float:left;">
+    <input type="range" name="filter-gain5" id="gain5" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut5.value = (1/54 * (Math.exp(8.0146 * gain5.value)-1)); gainOutV5.value = parseFloat(gainOut5.value).toFixed(2);">  <p>2500 - 
+    <output name="gainOutV5" id="gainOutV5">1</output>
+    <output name="gainOut5" id="gainOut5" style="display:none;">1</output></p>
+   </div>
+
+   <div style="float:left;">
+    <input type="range" name="filter-gain6" id="gain6" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut6.value = (1/54 * (Math.exp(8.0146 * gain6.value)-1)); gainOutV6.value = parseFloat(gainOut6.value).toFixed(2);">  <p>5000 - 
+    <output name="gainOutV6" id="gainOutV6">1</output>
+    <output name="gainOut6" id="gainOut6" style="display:none;">1</output></p>
+   </div>
+
+   <div style="float:left;">
+    <input type="range" name="filter-gain7" id="gain7" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut7.value = (1/54 * (Math.exp(8.0146 * gain7.value)-1)); gainOutV7.value = parseFloat(gainOut7.value).toFixed(2);">  <p>8000 - 
+    <output name="gainOutV7" id="gainOutV7">1</output>
+    <output name="gainOut7" id="gainOut7" style="display:none;">1</output></p>
+   </div>
+
+   <div style="float:left;">
+    <input type="range" name="filter-gain8" id="gain8" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut8.value = (1/54 * (Math.exp(8.0146 * gain8.value)-1)); gainOutV8.value = parseFloat(gainOut8.value).toFixed(2);">  <p>10000 - 
+    <output name="gainOutV8" id="gainOutV8">1</output>
+    <output name="gainOut8" id="gainOut8" style="display:none;">1</output></p>
+   </div>
+
+   <div style="float:left;">
+    <input type="range" name="filter-gain9" id="gain9" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut9.value = (1/54 * (Math.exp(8.0146 * gain9.value)-1)); gainOutV9.value = parseFloat(gainOut9.value).toFixed(2);">  <p>12500 - 
+    <output name="gainOutV9" id="gainOutV9">1</output>
+    <output name="gainOut9" id="gainOut9" style="display:none;">1</output></p>
+   </div>
+
+   <div style="float:left;">
+    <input type="range" name="filter-gain10" id="gain10" step="0.01" value="0.5" min="0" max="1" style="-webkit-appearance: slider-vertical;"
+           oninput="gainOut10.value = (1/54 * (Math.exp(8.0146 * gain10.value)-1)); gainOutV10.value = parseFloat(gainOut10.value).toFixed(2);">  <p>15000 - 
+    <output name="gainOutV10" id="gainOutV10">1</output>
+    <output name="gainOut10" id="gainOut10" style="display:none;">1</output></p>
+   </div>
+  </p>
+
+</div>
+
+<div>
+    <canvas id='scope' width=200 height=80></canvas>
+    <canvas id='spectrum' width=200 height=80></canvas>
+</div>
+<script src="/learn-csound-site/js/analyser.js"></script>
+
+
+<script type="text/javascript">
+window.parent.csound.stop();
+
+
+
+// attach callbacks to sliders
+function attachListeners() {
+   document.getElementById("amp").addEventListener("input",SetAmp);
+   document.getElementById("freq").addEventListener("input",SetFreq);
+   document.getElementById("armonicos").addEventListener("input",SetArmonicos);   
+   document.getElementById("pw").addEventListener("input",SetPw);   
+   document.getElementById("gain1").addEventListener("input",SetGain1);   
+   document.getElementById("gain2").addEventListener("input",SetGain2);   
+   document.getElementById("gain3").addEventListener("input",SetGain3);   
+   document.getElementById("gain4").addEventListener("input",SetGain4);   
+   document.getElementById("gain5").addEventListener("input",SetGain5);   
+   document.getElementById("gain6").addEventListener("input",SetGain6);   
+   document.getElementById("gain7").addEventListener("input",SetGain7);   
+   document.getElementById("gain8").addEventListener("input",SetGain8);   
+   document.getElementById("gain9").addEventListener("input",SetGain9);   
+   document.getElementById("gain10").addEventListener("input",SetGain10);   
+   
+}
+
+
+
+// set amplitude
+function SetAmp(){
+  SetParam('amp');
+}
+
+// set fundamental
+function SetFreq(){
+  SetParam('freq');
+}
+
+
+
+// set filter gain
+function SetGain1(){
+  SetParam('gainOut1');
+}
+// set filter gain
+function SetGain2(){
+  SetParam('gainOut2');
+}
+// set filter gain
+function SetGain3(){
+  SetParam('gainOut3');
+}
+// set filter gain
+function SetGain4(){
+  SetParam('gainOut4');
+}
+// set filter gain
+function SetGain5(){
+  SetParam('gainOut5');
+}
+// set filter gain
+function SetGain6(){
+  SetParam('gainOut6');
+}
+// set filter gain
+function SetGain7(){
+  SetParam('gainOut7');
+}
+// set filter gain
+function SetGain8(){
+  SetParam('gainOut8');
+}
+// set filter gain
+function SetGain9(){
+  SetParam('gainOut9');
+}
+// set filter gain
+function SetGain10(){
+  SetParam('gainOut10');
+}
+
+
+// set cutoff frequency
+function SetArmonicos(){
+  SetParam('armonicos');
+}
+
+
+// set cutoff frequency
+function SetPw(){
+  SetParam('pw');
+}
+
+
+// set parameter
+function SetParam(name) {
+  var val = document.getElementById(name).value;
+  window.parent.csound.setControlChannel(name, val);
+}
+
+function pause() {
+ if(document.getElementById('combobox').value == "-1") {
+  window.parent.csound.stop();
+  window.parent.csound.started=false;
+  console.log("pause");
+ } 
+ else {
+  var txt = `
+   <CsoundSynthesizer>
+
+   <CsInstruments>
+
+   0dbfs = 1
+   giSine ftgen 1, 0, 16384, 10, 1
+   
+   
+   
+   
+   instr 1
+     kfr  chnget  "freq"
+     kamp chnget  "amp"
+     karm chnget  "armonicos"
+     kpw  chnget  "pw"
+     kgain1  chnget  "gainOut1"
+     kgain2  chnget  "gainOut2"
+     kgain3  chnget  "gainOut3"
+     kgain4  chnget  "gainOut4"
+     kgain5  chnget  "gainOut5"
+     kgain6  chnget  "gainOut6"
+     kgain7  chnget  "gainOut7"
+     kgain8  chnget  "gainOut8"
+     kgain9  chnget  "gainOut9"
+     kgain10  chnget  "gainOut10"
+
+     kfr   port    kfr, 0.01
+     kamp  port    kamp, 0.01
+     kpw   port    kpw, 0.01
+     
+     kgain1 port    kgain1+0.0001, 0.01
+     kgain2 port    kgain2+0.0001, 0.01
+     kgain3 port    kgain3+0.0001, 0.01
+     kgain4 port    kgain4+0.0001, 0.01
+     kgain5 port    kgain5+0.0001, 0.01
+     kgain6 port    kgain6+0.0001, 0.01
+     kgain7 port    kgain7+0.0001, 0.01
+     kgain8 port    kgain8+0.0001, 0.01
+     kgain9 port    kgain9+0.0001, 0.01
+     kgain10 port    kgain10+0.0001, 0.01
+
+     if p4 == 0 then
+       a0 rand kamp, 100
+     elseif p4 == 1 then
+       a0 pinkish kamp
+     elseif p4 == 2 then
+       a0 buzz kamp, kfr, karm, giSine
+     elseif p4 == 3 then
+       a0 mpulse kamp, 1/kfr
+     elseif p4 == 4 then
+       a0 vco2 kamp, kfr
+     elseif p4 == 5 then
+       a0 vco2 kamp, kfr, 2, kpw
+     elseif p4 == 6 then
+       a0 rand kamp, 100, 1
+     endif
+        a1  pareq a0,   80, kgain1, (kgain1 >= 1 ? sqrt(0.5) :sqrt(0.5)),1
+        a2  pareq a1,   200, kgain2, (kgain2 >= 1 ? 4.31 : 0.232)
+        a3  pareq a2,   500, kgain3, (kgain3 >= 1 ? 4.31 : 0.232)
+        a4  pareq a3,  1000, kgain4, (kgain4 >= 1 ? 4.31 : 0.232)
+        a5  pareq a4,  2500, kgain5, (kgain5 >= 1 ? 4.31 : 0.232)
+        a6  pareq a5,  5000, kgain6, (kgain6 >= 1 ? 4.31 : 0.232)
+        a7  pareq a6,  8000, kgain7, (kgain7 >= 1 ? 4.31 : 0.232)
+        a8  pareq a7, 10000, kgain8, (kgain8 >= 1 ? 4.31 : 0.232)
+        a9  pareq a8, 12500, kgain9, (kgain9 >= 1 ? 4.31 : 0.232)
+       a10  pareq a9, 15000,kgain10, (kgain10 >= 1 ? sqrt(0.5) : sqrt(0.5)),2
+         out (p5 != 0 ? balance(a10,a0) : a10)
+    endin
+   </CsInstruments>
+   <CsScore>
+   </CsScore>
+   </CsoundSynthesizer>
+  `
+  window.parent.csound.stop();
+  window.parent.csound.Csound.setOption("-r" + window.parent.csound.Csound.getaudioContext().sampleRate);
+  window.parent.csound.CompileCsdText(txt);
+  window.parent.csound.Event("i 1 0 -1 " + document.getElementById('combobox').value + " " + document.getElementById('balance').value);
+   
+  SetParam("amp");
+  SetParam("freq");
+  SetParam("armonicos");
+  SetParam("pw");
+  SetParam("gainOut1");
+  SetParam("gainOut2");
+  SetParam("gainOut3");
+  SetParam("gainOut4");
+  SetParam("gainOut5");
+  SetParam("gainOut6");
+  SetParam("gainOut7");
+  SetParam("gainOut8");
+  SetParam("gainOut9");
+  SetParam("gainOut10");
+  window.parent.csound.Play();
+ }
+}
+attachListeners();
+document.getElementById('combobox').addEventListener('change', pause);
+document.getElementById('balance').addEventListener('change', pause);
+</script>
+</body> </html>
+

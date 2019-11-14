@@ -1,0 +1,252 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Sliders</title>
+</head>
+
+
+<body style="margin:0; text-align:center;">
+
+<div id="synth"> 
+  <p>
+    <input type="range" name="amplitud" id="amp" step="0.01" value="0.01" min="0" max="1" style="width: 100%;"
+           oninput="ampOut.value = amp.value"> Amplitud - 
+    <output name="ampOut" id="ampOut">0.01</output>
+  </p>
+  <p>
+    <input type="range" name="frequency" id="freq" step="0.01" value="440" min="20" max="8000" style="width: 100%;"
+           oninput="freqOut.value = freq.value"> Frecuencia - 
+    <output name="freqOut" id="freqOut">440</output> Hz
+  </p>
+  <p> 
+    <input type="range" name="pw" id="pw" step="0.01" value="0.5" min="0" max="1" style="width: 100%;"
+           oninput="pwOut.value = pw.value"> VCO2 - Ancho de Pulso - 
+    <output name="pwOut" id="pwOut">0.5</output> 
+  </p>
+  <p> 
+    <input type="range" name="amonicos" id="armonicos" step="1" value="1" min="1" max="50" style="width: 100%;"
+           oninput="armonicosOut.value = armonicos.value"> BUZZ - Número de Armónicos - 
+    <output name="armonicosOut" id="armonicosOut">1</output> 
+  </p>
+  <p>
+    <select id="combobox">
+     <option value="-1">OFF</option>
+     <option value="0">Ruido Blanco</option>
+     <option value="1">Ruido Rosa</option>
+     <option value="2">Tren de Pulsos</option>
+     <option value="3">Tren de Impulsos</option>
+     <option value="4">Diente de Sierra</option>
+     <option value="5">Cuadrada</option>
+    </select>
+    <select id="filtro">
+     <option value="0">-</option>
+     <option value="11">reson 2<sup>do</sup> Orden</option>
+     <option value="21">reson 2<sup>do</sup> Orden - PEAK</option>
+     <option value="31">reson 2<sup>do</sup> Orden - RMS</option>
+     <option value="41">Butterworth BP 2<sup>do</sup> Orden</option>
+     <option value="51">Butterworth BR 2<sup>do</sup> Orden</option>
+     <option value="61">pareq Peak 2<sup>do</sup> Orden</option>
+     <option value="71">pareq low-Shelf 1<sup>er</sup> Orden</option>
+     <option value="81">pareq high-Shelf 1<sup>er</sup> Orden</option>
+    </select>
+  </p>
+  <p> 
+    <input type="range" name="central-freq" id="cf" step="0.01" value="8000" min="20" max="14000" style="width: 100%;"
+           oninput="cfOut.value = cf.value; qOut.value = (cf.value / bw.value).toFixed(2)"> Frecuencia Central - 
+    <output name="cfOut" id="cfOut">8000</output> Hz
+  </p>
+  <p> 
+    <input type="range" name="bw-freq" id="bw" step="0.01" value="1000" min="1" max="10000" style="width: 100%;"
+           oninput="bwOut.value = bw.value; qOut.value = (cf.value / bw.value).toFixed(2)"> Ancho de Banda -  
+    <output name="bwOut" id="bwOut">1000</output> Hz <br> Q - 
+   
+    <output name="qOut" id="qOut">1</output> <br>
+  </p>
+  <p> 
+    <input type="range" name="filter-gain" id="gain" step="0.01" value="0.5" min="0" max="1" style="width: 100%;"
+           oninput="gainOut.value = (1/54 * (Math.exp(8.0146 * gain.value)-1)).toFixed(2);"> Ganancia - 
+    <output name="gainOut" id="gainOut">1</output>
+  </p>
+
+</div>
+
+<div>
+    <canvas id='scope' width=200 height=80></canvas>
+    <canvas id='spectrum' width=200 height=80></canvas>
+</div>
+
+<script src="/learn-csound-site/js/analyser.js"></script>
+
+
+<script type="text/javascript">
+
+window.parent.csound.stop();
+
+
+
+// attach callbacks to sliders
+function attachListeners() {
+   document.getElementById("amp").addEventListener("input",SetAmp);
+   document.getElementById("freq").addEventListener("input",SetFreq);
+   document.getElementById("armonicos").addEventListener("input",SetArmonicos);   
+   document.getElementById("pw").addEventListener("input",SetPw);   
+   document.getElementById("cf").addEventListener("input",SetCf);   
+   document.getElementById("bw").addEventListener("input",SetBw);   
+   document.getElementById("gain").addEventListener("input",SetGain);   
+   
+}
+
+
+
+// set amplitude
+function SetAmp(){
+  SetParam('amp');
+}
+
+// set fundamental
+function SetFreq(){
+  SetParam('freq');
+}
+
+// set central frequency
+function SetCf(){
+  SetParam('cf');
+}
+
+// set bw
+function SetBw(){
+  SetParam('bw');
+}
+
+// set filter gain
+function SetGain(){
+  SetParam('gainOut');
+}
+
+
+// set cutoff frequency
+function SetArmonicos(){
+  SetParam('armonicos');
+}
+
+
+// set cutoff frequency
+function SetPw(){
+  SetParam('pw');
+}
+
+
+// set parameter
+function SetParam(name) {
+  var val = document.getElementById(name).value;
+  window.parent.csound.setControlChannel(name, val);
+}
+
+function pause() {
+ if(document.getElementById('combobox').value == "-1") {
+  window.parent.csound.stop();
+  window.parent.csound.started=false;
+  console.log("pause");
+ } 
+ else {
+  var txt = `
+   <CsoundSynthesizer>
+
+   <CsInstruments>
+
+   0dbfs = 1
+   giSine ftgen 1, 0, 16384, 10, 1
+   
+   opcode Recursion, a, aikkkio
+    asig, ifiltro, kcf, kbw, kgain, iN, icnt xin
+    if icnt >= iN-1 goto cont
+      asig     Recursion asig, ifiltro, kcf, kbw, kgain, iN, icnt+1
+    cont:
+    if ifiltro == 1 then
+       asig reson asig, kcf, kbw
+     elseif ifiltro == 2 then
+       asig reson asig, kcf, kbw, 1
+     elseif ifiltro == 3 then
+       asig reson asig, kcf, kbw, 2
+     elseif ifiltro == 4 then
+       asig1 butterbp  asig, kcf, kbw
+       asig balance asig1, asig
+     elseif ifiltro == 5 then
+       asig1 butterbr  asig, kcf, kbw
+       asig balance asig1, asig
+     elseif ifiltro == 6 then
+       asig1 pareq asig, kcf, kgain, kcf/kbw, 0
+       asig balance asig1, asig
+     elseif ifiltro == 7 then
+       asig pareq asig, kcf, kgain, kcf/kbw, 1
+     elseif ifiltro == 8 then
+       asig pareq asig, kcf, kgain, kcf/kbw, 2
+     endif
+     
+          xout      asig
+  endop
+   
+   
+   
+   instr 1
+     kfr  chnget  "freq"
+     kamp chnget  "amp"
+     karm chnget  "armonicos"
+     kpw  chnget  "pw"
+     kcf  chnget  "cf"
+     kbw  chnget  "bw"
+     kgain  chnget  "gainOut"
+     kfr   port    kfr, 0.01
+     kamp  port    kamp, 0.01
+     kpw   port    kpw, 0.01
+     kcf   port    kcf, 0.01
+     kbw   port    kbw, 0.01
+     kgain port    kgain, 0.01
+     
+     if p4 == 0 then
+       a1 rand kamp, 100
+     elseif p4 == 1 then
+       a1 pinkish kamp
+     elseif p4 == 2 then
+       a1 buzz kamp, kfr, karm, giSine
+     elseif p4 == 3 then
+       a1 mpulse kamp, 1/kfr
+     elseif p4 == 4 then
+       a1 vco2 kamp, kfr
+     elseif p4 == 5 then
+       a1 vco2 kamp, kfr, 2, kpw
+     endif
+;     print int(p5/10)
+;     print (p5/10-int(p5/10))*10
+     if p5 > 0 then
+       a1 Recursion a1, int(p5/10), kcf, kbw, kgain, (p5/10-int(p5/10))*10
+     endif
+         out a1
+    endin
+   </CsInstruments>
+   <CsScore>
+   </CsScore>
+   </CsoundSynthesizer>
+  `
+  window.parent.csound.stop();
+  window.parent.csound.Csound.setOption("-r" + window.parent.csound.Csound.getaudioContext().sampleRate);
+  window.parent.csound.CompileCsdText(txt);
+  window.parent.csound.Event("i 1 0 -1 " + document.getElementById('combobox').value + " " + document.getElementById('filtro').value);
+   
+  SetParam("amp");
+  SetParam("freq");
+  SetParam("armonicos");
+  SetParam("pw");
+  SetParam("cf");
+  SetParam("bw");
+  SetParam("gainOut");
+  window.parent.csound.Play();
+ }
+}
+attachListeners();
+document.getElementById('combobox').addEventListener('change', pause);
+document.getElementById('filtro').addEventListener('change', pause);
+</script>
+</body> </html>
+

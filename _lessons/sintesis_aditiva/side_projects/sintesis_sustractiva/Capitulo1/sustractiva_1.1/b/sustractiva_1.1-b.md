@@ -2,6 +2,20 @@
 layout: lessonTxt
 ---
 
+<div class="paginationDiv">
+<div class="pagination">
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_aditiva/side_projects/sintesis_sustractiva/Capitulo1/sustractiva_1.1/a/', 'sustractiva_1.1-a.html','sustractiva_1.1-a.csd', false)" href="javascript:void(0);">&laquo;</a>
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_aditiva/side_projects/sintesis_sustractiva/Capitulo1/sustractiva_1.1/a/', 'sustractiva_1.1-a.html','sustractiva_1.1-a.csd', false)" href="javascript:void(0);">1</a>
+  <a class="active" href="#">2</a>
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_aditiva/side_projects/sintesis_sustractiva/Capitulo1/sustractiva_1.1/c/', 'sustractiva_1.1-c.html','sustractiva_1.1-c.csd', false)" href="javascript:void(0);">3</a>
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_aditiva/side_projects/sintesis_sustractiva/Capitulo1/sustractiva_1.1/d/', 'sustractiva_1.1-d.html','sustractiva_1.1-d.csd', false)" href="javascript:void(0);">4</a>
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_aditiva/side_projects/sintesis_sustractiva/Capitulo1/sustractiva_1.1/c/', 'sustractiva_1.1-c.html','sustractiva_1.1-c.csd', false)" href="javascript:void(0);">&raquo;</a>
+</div>
+</div>
+<br style="display: block; content: ''; margin-top: 20px;">
+<hr>
+<br style="display: block; content: ''; margin-top: 40px;">
+
 # <center> Síntesis Sustractiva </center>
 
 <br>
