@@ -1,0 +1,149 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Sliders</title>
+</head>
+
+
+<body style="margin:0; text-align:center;">
+
+<div id="synth"> 
+  <p>
+    <input type="range" name="m" id="m" step="0.01" value="1" min="0" max="10" style="width: 100%;"
+           oninput="mOut.value = m.value"> m - 
+    <output name="mOut" id="mOut">1</output>
+  </p>
+  <p>
+    <input type="range" name="fm" id="fm" step="0.01" value="5" min="0" max="8000" style="width: 100%;"
+           oninput="fmOut.value = fm.value"> f<sub>m</sub> - 
+    <output name="fmOut" id="fmOut">5</output> Hz
+  </p>
+  <p>
+    <select id="combobox">
+     <option value="-1">OFF</option>
+     <option value="0">ON</option>
+    </select>
+  </p>
+  <p>
+    <input type="range" name="amp" id="amp" step="0.01" value="0.5" min="0" max="1" style="width: 100%;"
+           oninput="ampOut.value = amp.value"> Amp - 
+    <output name="ampOut" id="ampOut">0.5</output>
+  </p>
+  <p>
+    <input type="range" name="fc" id="fc" step="0.01" value="440" min="20" max="8000" style="width: 100%;"
+           oninput="fcOut.value = fc.value"> f<sub>c</sub> - 
+    <output name="fcOut" id="fcOut">440</output> Hz
+  </p>
+</div>
+
+<div>
+    <canvas id='scope' width=200 height=80></canvas>
+    <canvas id='spectrum' width=200 height=80></canvas>
+</div>
+
+<script src="/learn-csound-site/js/analyser.js"></script>
+
+
+<script type="text/javascript">
+
+window.parent.csound.stop();
+
+// attach callbacks to sliders
+function attachListeners() {
+   document.getElementById("m").addEventListener("input",SetM);   
+   document.getElementById("fm").addEventListener("input",SetFm);   
+   document.getElementById("amp").addEventListener("input",SetAmp);
+   document.getElementById("fc").addEventListener("input",SetFc);
+}
+
+
+
+// set fundamental
+function SetM(){
+  SetParam('m');
+}
+
+// set fundamental
+function SetFm(){
+  SetParam('fm');
+}
+
+// set amplitude
+function SetAmp(){
+  SetParam('amp');
+}
+
+// set fundamental
+function SetFc(){
+  SetParam('fc');
+}
+
+
+// set parameter
+function SetParam(name) {
+  var val = document.getElementById(name).value;
+  window.parent.csound.setControlChannel(name, val);
+}
+
+function pause() {
+ if(document.getElementById('combobox').value == "-1") {
+  window.parent.csound.stop();
+  window.parent.csound.started=false;
+  console.log("pause");
+ } 
+ else {
+  var txt = `
+   <CsoundSynthesizer>
+
+   <CsInstruments>
+
+   0dbfs = 1
+   giSine ftgen 1, 0, 16384, 10, 1
+   
+   
+   
+
+
+   instr 1
+     km  chnget  "m"
+     kfm  chnget  "fm"
+     kamp chnget  "amp"
+     kfc  chnget  "fc"
+
+     km     port    km, 0.01
+     kfm    port    kfm, 0.01
+     kamp   port    kamp, 0.01
+     kfc    port    kfc, 0.01
+     
+    aMod   poscil        km*kamp,     kfm,          1
+    asig   poscil      aMod+kamp,     kfc,          1
+ 
+         out asig * 0.5
+    endin
+
+
+
+
+   </CsInstruments>
+   <CsScore>
+   </CsScore>
+   </CsoundSynthesizer>
+  `
+  window.parent.csound.stop();
+  window.parent.csound.Csound.setOption("-r" + window.parent.csound.Csound.getaudioContext().sampleRate);
+  window.parent.csound.CompileCsdText(txt);
+  window.parent.csound.Event("i 1 0 -1");
+   
+  SetParam("m");
+  SetParam("fm");
+  SetParam("amp");
+  SetParam("fc");
+  window.parent.csound.Play();
+ }
+}
+attachListeners();
+document.getElementById('combobox').addEventListener('change', pause);
+</script>
+</body> </html>
+
