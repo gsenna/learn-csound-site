@@ -17,10 +17,12 @@ instr 2
 ;        -          seed     semilla(0-2^32) 
                     seed             0
 
-; variables_ik     random    rango(min)   rango(max) 
-      iDurDev      random          -p9,          p9
-      kAmpDev      random         -p10,         p10
-      kFrqDev      random         -p11,         p11
+;  variable_i     random    rango(min)   rango(max) 
+     iDurDev      random          -p9,          p9
+
+; variables_k     rspline    rango(min)   rango(max)   frq(min)   frq(max)
+     kAmpDev      rspline        -p10,         p10,          0,        10
+     kFrqDev      rspline        -p11,         p11,          0,        10
 
 ; variables_pk       =    * fórmula de crecimiento exponencial *
          p3          =             p3 * 2^(iDurDev/1000) 
@@ -53,7 +55,7 @@ endin
 
 ;|-----------------------------dBFS-----------Frq-----|----------Tablas---------|----------%RndDev----------|
 ;| i. p1  p2       p3            p4            p5     |  p6(wf) p7(amp) p8(frq) | p9(dur) p10(amp) p11(frq) |
-   i   2   0     $DUR          $AMP          $FRQ            1      4       5        800       2        3
+   i   2   0     $DUR          $AMP          $FRQ            1      4       5        100      100        1
    i   2   0 [$DUR * 0.90] [$AMP * 0.67] [$FRQ * 0.56]   
    i   2   0 [$DUR * 0.65] [$AMP * 1.00] [$FRQ * 0.92] 
    i   2   0 [$DUR * 0.55] [$AMP * 1.80] [$FRQ * 0.92]
