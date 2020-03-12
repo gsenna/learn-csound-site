@@ -5,9 +5,9 @@ layout: lessonTxt
 <div class="pagination">
   <a href="#">&laquo;</a>
   <a class="active" href="#">Intro</a>
-  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_granular/chapter1/3.1.1/a/', '3.1.1-a.html','oscil.csd', false)" href="javascript:void(0);">1</a>
-  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_granular/chapter1/3.1.1/b/', '3.1.1-b.html','oscil.csd', false)" href="javascript:void(0);">2</a>
-  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_granular/chapter1/3.1.1/a/', '3.1.1-a.html','oscil.csd', false)" href="javascript:void(0);">&raquo;</a>
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_granular/chapter1/3.1.1/a/', '3.1.1-a.html','', false)" href="javascript:void(0);">1</a>
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_granular/chapter1/3.1.1/b/', '3.1.1-b.html','', false)" href="javascript:void(0);">2</a>
+  <a onclick="loadOnClick('{{site.baseurl}}/lessons/sintesis_granular/chapter1/3.1.1/a/', '3.1.1-a.html','', false)" href="javascript:void(0);">&raquo;</a>
 </div>
 </div>
 <br style="display: block; content: ''; margin-top: 20px;">
