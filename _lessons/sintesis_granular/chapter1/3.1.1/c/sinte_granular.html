@@ -1,0 +1,715 @@
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Sliders</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+
+
+<body style="margin:0; text-align:center;">
+
+<div id="synth"> 
+  <p>
+    <select id="combobox">
+     <option value="-1">OFF</option>
+     <option value="0">ON</option>
+    </select>
+  </p>
+<p>
+  <label for="MinTimeEventInput">Min Time Event:</label>
+  <input type="text" id="MinTimeEventInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="MinTimeEventSlider"></div>
+</p>
+<p>
+  <label for="MaxPolyphonyInput">Max Polyphony:</label>
+  <input type="text" id="MaxPolyphonyInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="MaxPolyphonySlider"></div>
+</p>  
+<p>
+  <label for="GrainRateInput">Grain Rate:</label>
+  <input type="text" id="GrainRateInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="GrainRateSlider"></div>
+</p>
+<p>
+  <label for="GrainDurInput">Grain Dur:</label>
+  <input type="text" id="GrainDurInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="GrainDurSlider"></div>
+</p>
+<p>
+  <label for="AmpInput">Amp:</label>
+  <input type="text" id="AmpInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="AmpSlider"></div>
+</p>
+<p>
+  <label for="FrqInput">Frq:</label>
+  <input type="text" id="FrqInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="FrqSlider"></div>
+</p>
+<p>
+  <label for="WaveFnInput">Wave Fn:</label>
+  <input type="text" id="WaveFnInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="WaveFnSlider"></div>
+</p>
+<p>
+  <label for="EnvFnInput">Env Fn:</label>
+  <input type="text" id="EnvFnInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="EnvFnSlider"></div>
+</p>
+<p>
+  <label for="PanIndexInput">Pan Index:</label>
+  <input type="text" id="PanIndexInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="PanIndexSlider"></div>
+</p>
+<p>
+  <label for="ModRatioInput">FM Mod Ratio:</label>
+  <input type="text" id="ModRatioInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="ModRatioSlider"></div>
+</p>
+<p>
+  <label for="ModIndexInput">FM Mod Index:</label>
+  <input type="text" id="ModIndexInput" readonly style="border:0; color:#f6931f; font-weight:bold;">
+  <div id="ModIndexSlider"></div>
+</p>
+</div>
+
+<div>
+    <canvas id='scope' width=200 height=80></canvas>
+    <canvas id='spectrum' width=200 height=80></canvas>
+</div>
+
+<script src="/learn-csound-site/js/analyser.js"></script>
+
+
+
+<script type="text/javascript">
+
+window.parent.csound.stop();
+var csoundIsPlaying = false;
+
+
+function pause() {
+ if(document.getElementById('combobox').value == "-1") {
+  window.parent.csound.stop();
+  window.parent.csound.started=false;
+  csoundIsPlaying = false;
+  console.log("pause");
+ } 
+ else {
+  var txt = `
+   <CsoundSynthesizer>
+
+   <CsInstruments>
+sr = 48000
+ksmps = 1
+nchnls = 2
+0dbfs = 1
+
+
+giSine     ftgen   1, 0, 16384, 10, 1                                                       ; sinusoide
+giSaw      ftgen   2, 0, 16384, 10, 1, 0.5, 0.3, 0.25,  0.2,  0.167,  0.14,  0.125,  0.111  ; diente de sierra
+giSquare   ftgen   3, 0, 16384, 10, 1,   0, 0.3,    0,  0.2,      0,  0.14,      0,  0.111  ; cuadrada
+
+giLinseg   ftgen   4, 0,   16385,      7,        0,  4000,  1,  8384,      1,  4000,  0     ; trapezoide
+giExpseg   ftgen   5, 0,   16385,      5,    0.001,  4000,  1,  8384,  0.001                ; exponencial
+giGauss    ftgen   6, 0,   16385,     20,        6,     1                                   ; gaussiana
+giHanning  ftgen   7, 0,   16385,     20,        2,     1                                   ; Hanning
+giBartlett ftgen   8, 0,   16385,     20,        3,     1                                   ; Bartlett
+giRandom   ftgen   9, 0,   16385,     21,        1,     1                                   ; rnd
+
+
+seed 0
+
+instr 1
+  iInstr               =         2
+  iStart               =         0
+  
+  kGrainRate         init        0
+
+  kTrigger           metro       kGrainRate
+ 
+  kGrainRate        trandom      kTrigger,       chnget:k("GrainRateMin"),     chnget:k("GrainRateMax") 
+  kGrainDur         trandom      kTrigger,       chnget:k("GrainDurMin")/1000,      chnget:k("GrainDurMax")/1000 
+
+
+  if (kGrainDur > 0) kgoto bypassDur
+      kGrainDur        =         1 / kGrainRate
+
+bypassDur:
+
+  kAmp              trandom      kTrigger,       chnget:k("AmpMin"),           chnget:k("AmpMax") 
+  kFrq              trandom      kTrigger,       chnget:k("FrqMin"),           chnget:k("FrqMax") 
+  kWaveFn           trandom      kTrigger,       chnget:k("WaveFnMin"),        chnget:k("WaveFnMax") 
+  kEnvFn            trandom      kTrigger,       chnget:k("EnvFnMin"),         chnget:k("EnvFnMax") 
+  kPanIndex         trandom      kTrigger,       chnget:k("PanIndexMin"),      chnget:k("PanIndexMax") 
+  kModRatio         trandom      kTrigger,       chnget:k("ModRatioMin"),      chnget:k("ModRatioMax") 
+  kModIndex         trandom      kTrigger,       chnget:k("ModIndexMin"),      chnget:k("ModIndexMax") 
+
+                  
+                     schedkwhen  kTrigger,       chnget:k("MinTimeEvent")/1000,    chnget:k("MaxPolyphony"),       \
+                                 iInstr,         iStart,                                                           \  
+                                 kGrainDur,      kAmp,            kFrq,            int(kWaveFn),     int(kEnvFn),  \
+                                 kPanIndex,      kModRatio,       kModIndex
+;printk2 chnget:k("MinTimeEvent")/1000
+;printk2 chnget:k("MaxPolyphony")
+printk2 chnget:k("GrainRateMin")
+printk2 chnget:k("GrainRateMax")
+; printk2 chnget:k("AmpMin")
+; printk2 chnget:k("AmpMin")
+; printk2 chnget:k("FrqMin")
+; printk2 chnget:k("FrqMax")
+; printk2 chnget:k("WaveFnMin")
+; printk2 chnget:k("WaveFnMax")
+; printk2 chnget:k("EnvFnMin")
+; printk2 chnget:k("EnvFnMax")
+ 
+; printk2 chnget:k("PanIndexMin")
+; printk2 chnget:k("PanIndexMax")
+; printk2 chnget:k("ModRatioMin")
+; printk2 chnget:k("ModRatioMax")
+; printk2 chnget:k("ModIndexMin")
+; printk2 chnget:k("ModIndexMax")
+
+endin
+
+instr 2
+  iFrq       =      p5
+  iWaveFn    =      p6
+  iEnvFn     =      p7
+  iPanIndx   =      p8
+  iFmRatio   =      p9
+  iFmIndex   =     p10
+
+  iAmp    ampdbfs   p4
+
+  aMod     init      0
+  
+  aEnv    poscil  iAmp,        1 / p3,      iEnvFn
+  
+
+  if (iFmRatio == 0 || iFmIndex == 0) goto bypassFM  
+
+    iModFreq   =       iFrq      /   iFmRatio 
+    iModAmp    =       iModFreq  *   iFmIndex
+    iModFn     =       1
+    
+    aMod     poscil    iModAmp,    iModFreq,     iModFn
+
+
+bypassFM:
+  aSig    poscil  aEnv,   iFrq + aMod,   iWaveFn
+ 
+  aL, aR   pan2   aSig,   iPanIndx
+
+           out    aL,     aR
+endin
+
+   </CsInstruments>
+   <CsScore>
+   </CsScore>
+   </CsoundSynthesizer>
+     `
+  
+  window.parent.csound.stop();
+  window.parent.csound.Csound.setOption("-r" + window.parent.csound.Csound.getaudioContext().sampleRate);
+  window.parent.csound.Csound.setOption("-m0");
+  window.parent.csound.CompileCsdText(txt);
+  window.parent.csound.Event("i 1 0 -1");
+  
+  window.parent.csound.setControlChannel("MinTimeEvent", $( "#MinTimeEventSlider" ).slider( "value" ));
+  window.parent.csound.setControlChannel("MaxPolyphony", $( "#MaxPolyphonySlider" ).slider( "value" ));
+  
+  var params = ["GrainRate", "GrainDur", "Amp", "Frq", "WaveFn", "EnvFn", "PanIndex", "ModRatio", "ModIndex"];
+  for(var x = 0; x < params.length; ++x)
+  {
+    window.parent.csound.setControlChannel(params[x] + "Min", $( "#" + params[x] + "Slider" ).slider( "values", 0 ));
+    if ($( "#" + params[x] + "Slider" ).slider("option", "range"))
+      window.parent.csound.setControlChannel(params[x] + "Max", $( "#" + params[x] + "Slider" ).slider( "values", 1 ));
+    else
+      window.parent.csound.setControlChannel(params[x] + "Max", $( "#" + params[x] + "Slider" ).slider( "values", 0 ));
+  }
+
+  csoundIsPlaying = true;
+  window.parent.csound.Play();
+ }
+}
+  
+  $('#combobox').change(function() {
+	  pause();
+  });
+ 
+  $( function() {
+
+    $( "#MinTimeEventSlider" ).slider({
+      min: 0,
+      max: 1000,
+      step: 0.01,
+      value: 0,
+      slide: function( event, ui ) {
+        $( "#MinTimeEventInput" ).val( ui.value + " msec");
+        window.parent.csound.setControlChannel("MinTimeEvent", ui.value);
+      }
+    });
+    $( "#MinTimeEventInput" ).val( $( "#MinTimeEventSlider" ).slider( "value" ) + " msec");
+    
+    
+    
+    $( "#MaxPolyphonySlider" ).slider({
+      min: 0,
+      max: 100,
+      step: 1,
+      value: 0,
+      slide: function( event, ui ) {
+        $( "#MaxPolyphonyInput" ).val( ui.value + " Voices");
+        window.parent.csound.setControlChannel("MaxPolyphony", ui.value);
+      }
+    });
+    $( "#MaxPolyphonyInput" ).val( $( "#MaxPolyphonySlider" ).slider( "value" ) + " Voices");
+
+ 
+
+
+
+    $( "#GrainRateSlider" ).slider({
+      range: true,
+      min: 1,
+      max: 2000,
+      step: 0.01,
+      values: [ 20, 100 ],
+      slide: function( event, ui ) {
+		var b = ($( "#GrainRateSlider" ).slider("option", "range") ? 1 : 0);
+        if (b)
+          $( "#GrainRateInput" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] + " gps");
+        else
+          $( "#GrainRateInput" ).val( ui.values[ 0 ] + " gps");
+        
+        if (csoundIsPlaying)
+        {
+          window.parent.csound.setControlChannel("GrainRateMin", ui.values[ 0 ]);
+          window.parent.csound.setControlChannel("GrainRateMax", ui.values[ b ]);
+		}
+      }
+    });
+    
+    $("#GrainRateSlider").on("dblclick", function () {
+		if ($( "#GrainRateSlider" ).slider("option", "range"))
+		{
+          $( "#GrainRateSlider" ).slider("option", "values", [ 60 ]);
+          $( "#GrainRateSlider" ).slider("option", "range", false );
+          $( "#GrainRateInput" ).val( "60 gps");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("GrainRateMin", 60);
+            window.parent.csound.setControlChannel("GrainRateMax", 60);
+	      }
+	    }
+	    else
+	    {
+          $( "#GrainRateSlider" ).slider("option", "values", [ 20, 120 ]);
+          $( "#GrainRateSlider" ).slider("option", "range", true );
+          $( "#GrainRateInput" ).val( "20 - 120 gps");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("GrainRateMin", 20);
+            window.parent.csound.setControlChannel("GrainRateMax", 120);
+	      }
+		}
+    });
+
+    $( "#GrainRateInput" ).val( $( "#GrainRateSlider" ).slider( "values", 0 ) +
+      " - " + $( "#GrainRateSlider" ).slider( "values", 1 ) + " gps");
+
+    $( "#GrainDurSlider" ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      step: 0.01,
+      values: [ 20, 60 ],
+      slide: function( event, ui ) {
+		var b = ($( "#GrainDurSlider" ).slider("option", "range") ? 1 : 0);
+        if (b)
+          $( "#GrainDurInput" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] + " msec");
+        else
+          $( "#GrainDurInput" ).val( ui.values[ 0 ] + " msec");
+        
+        if (csoundIsPlaying)
+        {
+          window.parent.csound.setControlChannel("GrainDurMin", ui.values[ 0 ]);
+          window.parent.csound.setControlChannel("GrainDurMax", ui.values[ b ]);
+		}
+      }
+    });
+    
+    $("#GrainDurSlider").on("dblclick", function () {
+		if ($( "#GrainDurSlider" ).slider("option", "range"))
+		{
+          $( "#GrainDurSlider" ).slider("option", "values", [ 50 ]);
+          $( "#GrainDurSlider" ).slider("option", "range", false );
+          $( "#GrainDurInput" ).val( "50 msec");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("GrainDurMin", 50);
+            window.parent.csound.setControlChannel("GrainDurMax", 50);
+	      }
+	    }
+	    else
+	    {
+          $( "#GrainDurSlider" ).slider("option", "values", [ 20, 60 ]);
+          $( "#GrainDurSlider" ).slider("option", "range", true );
+          $( "#GrainDurInput" ).val( "20 - 60 msec");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("GrainDurMin", 20);
+            window.parent.csound.setControlChannel("GrainDurMax", 60);
+	      }
+		}
+    });
+
+    $( "#GrainDurInput" ).val( $( "#GrainDurSlider" ).slider( "values", 0 ) +
+      " - " + $( "#GrainDurSlider" ).slider( "values", 1 ) + " msec");
+
+    $( "#AmpSlider" ).slider({
+      range: true,
+      min: -80,
+      max: 0,
+      step: 0.01,
+      values: [ -18, -12 ],
+      slide: function( event, ui ) {
+		var b = ($( "#AmpSlider" ).slider("option", "range") ? 1 : 0);
+        if (b)
+          $( "#AmpInput" ).val( ui.values[ 0 ] + "     -     " + ui.values[ 1 ] + " dBFS");
+        else
+          $( "#AmpInput" ).val( ui.values[ 0 ] + " dBFS");
+        
+        if (csoundIsPlaying)
+        {
+          window.parent.csound.setControlChannel("AmpMin", ui.values[ 0 ]);
+          window.parent.csound.setControlChannel("AmpMax", ui.values[ b ]);
+		}
+      }
+    });
+    
+    $("#AmpSlider").on("dblclick", function () {
+		if ($( "#AmpSlider" ).slider("option", "range"))
+		{
+          $( "#AmpSlider" ).slider("option", "values", [ -15 ]);
+          $( "#AmpSlider" ).slider("option", "range", false );
+          $( "#AmpInput" ).val( "-15 dBFS");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("AmpMin", -15);
+            window.parent.csound.setControlChannel("AmpMax", -15);
+	      }
+	    }
+	    else
+	    {
+          $( "#AmpSlider" ).slider("option", "values", [ -18, -12 ]);
+          $( "#AmpSlider" ).slider("option", "range", true );
+          $( "#AmpInput" ).val( "-18     -     -12 msec");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("AmpMin", -18);
+            window.parent.csound.setControlChannel("AmpMax", -12);
+	      }
+		}
+    });
+    $( "#AmpInput" ).val( $( "#AmpSlider" ).slider( "values", 0 ) +
+      " - " + $( "#AmpSlider" ).slider( "values", 1 ) + " dBFS");
+    
+    $( "#FrqSlider" ).slider({
+      range: true,
+      min: 20,
+      max: 20000,
+      step: 0.01,
+      values: [ 100, 800 ],
+      slide: function( event, ui ) {
+		var b = ($( "#FrqSlider" ).slider("option", "range") ? 1 : 0);
+        if (b)
+          $( "#FrqInput" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] + " Hz");
+        else
+          $( "#FrqInput" ).val( ui.values[ 0 ] + " Hz");
+        
+        if (csoundIsPlaying)
+        {
+          window.parent.csound.setControlChannel("FrqMin", ui.values[ 0 ]);
+          window.parent.csound.setControlChannel("FrqMax", ui.values[ b ]);
+		}
+      }
+    });
+    
+    $("#FrqSlider").on("dblclick", function () {
+		if ($( "#FrqSlider" ).slider("option", "range"))
+		{
+          $( "#FrqSlider" ).slider("option", "values", [ 440 ]);
+          $( "#FrqSlider" ).slider("option", "range", false );
+          $( "#FrqInput" ).val( "440 Hz");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("FrqMin", 440);
+            window.parent.csound.setControlChannel("FrqMax", 440);
+	      }
+	    }
+	    else
+	    {
+          $( "#FrqSlider" ).slider("option", "values", [ 100, 800 ]);
+          $( "#FrqSlider" ).slider("option", "range", true );
+          $( "#FrqInput" ).val( "100 - 800 Hz");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("FrqMin", 100);
+            window.parent.csound.setControlChannel("FrqMax", 800);
+	      }
+		}
+    });    
+    $( "#FrqInput" ).val( $( "#FrqSlider" ).slider( "values", 0 ) +
+      " - " + $( "#FrqSlider" ).slider( "values", 1 ) + " Hz");
+
+    $( "#WaveFnSlider" ).slider({
+      range: true,
+      min: 1,
+      max: 3.999999999,
+      step: 0.01,
+      values: [ 1, 1 ],
+      slide: function( event, ui ) {
+		var b = ($( "#WaveFnSlider" ).slider("option", "range") ? 1 : 0);
+        if (b)
+          $( "#WaveFnInput" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+        else
+          $( "#WaveFnInput" ).val( ui.values[ 0 ]);
+        
+        if (csoundIsPlaying)
+        {
+          window.parent.csound.setControlChannel("WaveFnMin", ui.values[ 0 ]);
+          window.parent.csound.setControlChannel("WaveFnMax", ui.values[ b ]);
+		}
+      }
+    });
+    
+    $("#WaveFnSlider").on("dblclick", function () {
+		if ($( "#WaveFnSlider" ).slider("option", "range"))
+		{
+          $( "#WaveFnSlider" ).slider("option", "values", [ 1 ]);
+          $( "#WaveFnSlider" ).slider("option", "range", false );
+          $( "#WaveFnInput" ).val( "1");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("WaveFnMin", 1);
+            window.parent.csound.setControlChannel("WaveFnMax", 1);
+	      }
+	    }
+	    else
+	    {
+          $( "#WaveFnSlider" ).slider("option", "values", [ 1, 1 ]);
+          $( "#WaveFnSlider" ).slider("option", "range", true );
+          $( "#WaveFnInput" ).val( "1 - 1");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("WaveFnMin", 1);
+            window.parent.csound.setControlChannel("WaveFnMax", 1);
+	      }
+		}
+    });    
+    $( "#WaveFnInput" ).val( $( "#WaveFnSlider" ).slider( "values", 0 ) +
+      " - " + $( "#WaveFnSlider" ).slider( "values", 1 ));
+
+    $( "#EnvFnSlider" ).slider({
+      range: true,
+      min: 4,
+      max: 9.999999999,
+      step: 0.01,
+      values: [ 6, 7 ],
+      slide: function( event, ui ) {
+		var b = ($( "#EnvFnSlider" ).slider("option", "range") ? 1 : 0);
+        if (b)
+          $( "#EnvFnInput" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+        else
+          $( "#EnvFnInput" ).val( ui.values[ 0 ]);
+        
+        if (csoundIsPlaying)
+        {
+          window.parent.csound.setControlChannel("EnvFnMin", ui.values[ 0 ]);
+          window.parent.csound.setControlChannel("EnvFnMax", ui.values[ b ]);
+		}
+      }
+    });
+    
+    $("#EnvFnSlider").on("dblclick", function () {
+		if ($( "#EnvFnSlider" ).slider("option", "range"))
+		{
+          $( "#EnvFnSlider" ).slider("option", "values", [ 6 ]);
+          $( "#EnvFnSlider" ).slider("option", "range", false );
+          $( "#EnvFnInput" ).val( "6");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("EnvFnMin", 6);
+            window.parent.csound.setControlChannel("EnvFnMax", 6);
+	      }
+	    }
+	    else
+	    {
+          $( "#EnvFnSlider" ).slider("option", "values", [ 6, 7 ]);
+          $( "#EnvFnSlider" ).slider("option", "range", true );
+          $( "#EnvFnInput" ).val( "6 - 7");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("EnvFnMin", 6);
+            window.parent.csound.setControlChannel("EnvFnMax", 7);
+	      }
+		}
+    });    
+    $( "#EnvFnInput" ).val( $( "#EnvFnSlider" ).slider( "values", 0 ) +
+      " - " + $( "#EnvFnSlider" ).slider( "values", 1 ));
+
+   $( "#PanIndexSlider" ).slider({
+      range: true,
+      min: 0.00,
+      max: 1.00,
+      step: 0.01,
+      values: [ 0.00, 1.00 ],
+      slide: function( event, ui ) {
+		var b = ($( "#PanIndexSlider" ).slider("option", "range") ? 1 : 0);
+        if (b)
+          $( "#PanIndexInput" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+        else
+          $( "#PanIndexInput" ).val( ui.values[ 0 ]);
+        
+        if (csoundIsPlaying)
+        {
+          window.parent.csound.setControlChannel("PanIndexMin", ui.values[ 0 ]);
+          window.parent.csound.setControlChannel("PanIndexMax", ui.values[ b ]);
+		}
+      }
+    });
+    
+    $("#PanIndexSlider").on("dblclick", function () {
+		if ($( "#PanIndexSlider" ).slider("option", "range"))
+		{
+          $( "#PanIndexSlider" ).slider("option", "values", [ 0.5 ]);
+          $( "#PanIndexSlider" ).slider("option", "range", false );
+          $( "#PanIndexInput" ).val( "0.5");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("PanIndexMin", 0.5);
+            window.parent.csound.setControlChannel("PanIndexMax", 0.5);
+	      }
+	    }
+	    else
+	    {
+          $( "#PanIndexSlider" ).slider("option", "values", [ 0, 1 ]);
+          $( "#PanIndexSlider" ).slider("option", "range", true );
+          $( "#PanIndexInput" ).val( "0 - 1");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("PanIndexMin", 0);
+            window.parent.csound.setControlChannel("PanIndexMax", 1);
+	      }
+		}
+    });    
+    $( "#PanIndexInput" ).val( $( "#PanIndexSlider" ).slider( "values", 0 ) +
+      " - " + $( "#PanIndexSlider" ).slider( "values", 1 ));
+
+   $( "#ModRatioSlider" ).slider({
+      range: true,
+      min: 0.00,
+      max: 20.00,
+      step: 0.01,
+      values: [ 0.5, 2.0 ],
+      slide: function( event, ui ) {
+		var b = ($( "#ModRatioSlider" ).slider("option", "range") ? 1 : 0);
+        if (b)
+          $( "#ModRatioInput" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+        else
+          $( "#ModRatioInput" ).val( ui.values[ 0 ]);
+        
+        if (csoundIsPlaying)
+        {
+          window.parent.csound.setControlChannel("ModRatioMin", ui.values[ 0 ]);
+          window.parent.csound.setControlChannel("ModRatioMax", ui.values[ b ]);
+		}
+      }
+    });
+    
+    $("#ModRatioSlider").on("dblclick", function () {
+		if ($( "#ModRatioSlider" ).slider("option", "range"))
+		{
+          $( "#ModRatioSlider" ).slider("option", "values", [ 1 ]);
+          $( "#ModRatioSlider" ).slider("option", "range", false );
+          $( "#ModRatioInput" ).val( "1");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("ModRatioMin", 1);
+            window.parent.csound.setControlChannel("ModRatioMax", 1);
+	      }
+	    }
+	    else
+	    {
+          $( "#ModRatioSlider" ).slider("option", "values", [ 0.5, 2 ]);
+          $( "#ModRatioSlider" ).slider("option", "range", true );
+          $( "#ModRatioInput" ).val( "0.5 - 2");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("ModRatioMin", 0.5);
+            window.parent.csound.setControlChannel("ModRatioMax", 2);
+	      }
+		}
+    });    
+    $( "#ModRatioInput" ).val( $( "#ModRatioSlider" ).slider( "values", 0 ) +
+      " - " + $( "#ModRatioSlider" ).slider( "values", 1 ));
+
+   $( "#ModIndexSlider" ).slider({
+      range: true,
+      min: 0.00,
+      max: 20.00,
+      step: 0.01,
+      values: [ 0.00, 0.00 ],
+      slide: function( event, ui ) {
+		var b = ($( "#ModIndexSlider" ).slider("option", "range") ? 1 : 0);
+        if (b)
+          $( "#ModIndexInput" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+        else
+          $( "#ModIndexInput" ).val( ui.values[ 0 ]);
+        
+        if (csoundIsPlaying)
+        {
+          window.parent.csound.setControlChannel("ModIndexMin", ui.values[ 0 ]);
+          window.parent.csound.setControlChannel("ModIndexMax", ui.values[ b ]);
+		}
+      }
+    });
+    
+    $("#ModIndexSlider").on("dblclick", function () {
+		if ($( "#ModIndexSlider" ).slider("option", "range"))
+		{
+          $( "#ModIndexSlider" ).slider("option", "values", [ 0 ]);
+          $( "#ModIndexSlider" ).slider("option", "range", false );
+          $( "#ModIndexInput" ).val( "0");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("ModIndexMin", 0);
+            window.parent.csound.setControlChannel("ModIndexMax", 0);
+	      }
+	    }
+	    else
+	    {
+          $( "#ModIndexSlider" ).slider("option", "values", [ 0, 0 ]);
+          $( "#ModIndexSlider" ).slider("option", "range", true );
+          $( "#ModIndexInput" ).val( "0 - 0");
+          if (csoundIsPlaying)
+          {
+            window.parent.csound.setControlChannel("ModIndexMin", 0);
+            window.parent.csound.setControlChannel("ModIndexMax", 0);
+	      }
+		}
+    });    
+    $( "#ModIndexInput" ).val( $( "#ModIndexSlider" ).slider( "values", 0 ) +
+      " - " + $( "#ModIndexSlider" ).slider( "values", 1 ));
+
+
+      
+  } );
+</script>
+</body> </html>
+
