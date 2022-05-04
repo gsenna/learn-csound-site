@@ -19,11 +19,19 @@
       const CSD_PATH = "{{ page.csd }}";
     </script>
     <script>
-	// Initialize Module before WASM loads
+	function logger(logTxt) {
+	  console.log(logTxt);
+      var logger = document.getElementById('log');
+      if (typeof(logger) != 'undefined' && logger != null)
+      {
+        logger.innerHTML += logTxt + '<br>';
+	  }
+	}
+  	// Initialize Module before WASM loads
     Module = {};
     Module['wasmBinaryFile'] = "{{site.baseurl}}/js/wasm/libcsound.wasm";
-    Module['print'] = console.log;
-    Module['printErr'] = console.log;
+    Module['print'] = logger;
+    Module['printErr'] = logger;
     //Module['onRuntimeInitialized'] = onRuntimeInitialized;
     </script>
     <script src="{{site.baseurl}}/js/wasm/csound.js"></script>

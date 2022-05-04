@@ -2,7 +2,7 @@ var cs;
 var youtube_api_init = 0;
 const currentFilePath = "/temp.csd";
 //const AudioContext_sr = new (window.AudioContext || window.webkitAudioContext)();
-const fileManager = new FileManager(['csd'], 
+const fileManager = new FileManager(['csd', 'wav'], 
         function(t) { console.debug(t); });
 
 function evalCode() {
@@ -11,7 +11,14 @@ function evalCode() {
     fileManager.writeStringToFile(currentFilePath,
          txt);
      csound.stop();
+      var logger = document.getElementById('log');
+      if (typeof(logger) != 'undefined' && logger != null)
+      {
+		  logger.innerHTML = '';
+	  }
      csound.Csound.setOption("-r" + csound.Csound.getaudioContext().sampleRate);
+     csound.Csound.setOption("-m0");
+     csound.Csound.setOption("-d");
      csound.CompileCsdText(currentFilePath);
      csound.Play();
     //editor.refresh();
@@ -102,6 +109,7 @@ function moduleDidLoad()
 		      if(ld != null)
 		      {
                 ld.innerHTML = "<b>C l i c k &nbsp;  p a r a &nbsp; I n g r e s a r . . .</b>";
+                //csound.CopyToLocal("audios/fox.wav","fox.wav");
                 ld.addEventListener ("click", function() {
 			    csound.Csound.getaudioContext().resume().then(() => {
 						ld.remove();
