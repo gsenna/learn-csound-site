@@ -68,7 +68,7 @@ var FileManager = function(allowedFileExtensions, errorPrintCallback) {
 		xmlHttpRequest.send(null);
 	};
 
-	this.fileUploadFromClient = function(fileObject) {
+	this.fileUploadFromClient = function(fileObject, fileUploadCallback) {
 
 
 		if (checkFileExtension(fileObject.name) == false) {
@@ -83,7 +83,7 @@ var FileManager = function(allowedFileExtensions, errorPrintCallback) {
 			var stream = FS.open(fileObject.name, 'w+');
 			FS.write(stream, data, 0, data.length, 0);
 			FS.close(stream);
-			window.alert("Archivo cargado.");
+			fileUploadCallback("El archivo " + fileObject.name + " ha sido cargado.");
 		}
 		reader.readAsArrayBuffer(fileObject);
 
