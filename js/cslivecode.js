@@ -11,11 +11,15 @@ function evalCode() {
     fileManager.writeStringToFile(currentFilePath,
          txt);
      csound.stop();
-      var logger = document.getElementById('log');
-      if (typeof(logger) != 'undefined' && logger != null)
-      {
-		  logger.innerHTML = '';
-	  }
+     var logger = document.getElementById('log');
+     if (typeof(logger) != 'undefined' && logger != null) {
+         var files = FS.readdir("/");
+         logger.innerHTML = '';
+         files.forEach(file => {
+             if (file.split('.').pop() == "wav")
+               logger.innerHTML += file + '<br>';
+           });
+     }
      csound.Csound.setOption("-r" + csound.Csound.getaudioContext().sampleRate);
      csound.Csound.setOption("-m0");
      csound.Csound.setOption("-d");
